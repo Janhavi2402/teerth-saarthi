@@ -1,0 +1,7 @@
+# Ignore node_modules in both folders
+back-ts/node_modules/
+front-ts-new/node_modules/
+
+# Ignore environment files
+.env
+.DS_Store
