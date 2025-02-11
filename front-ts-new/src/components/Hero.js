@@ -51,14 +51,14 @@ const Section = styled.section`
   margin-top: 0.5rem;
   padding-bottom: 1rem;
   width: 100%;
-  height: 60rem; /* Reduced height of the section */
+  height: 60rem; 
 
   .background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 70%; /* Adjusted to make the video height smaller */
+    height: 70%; 
     z-index: 1;
 
     video {
@@ -66,7 +66,7 @@ const Section = styled.section`
       height: 100%;
       object-fit: cover;
       filter: brightness(60%);
-      transition: opacity 1s ease-in-out; /* Smooth fade effect */
+      transition: opacity 1s ease-in-out; 
     }
   }
 
@@ -98,9 +98,9 @@ const Section = styled.section`
   }
 
   @media screen and (min-width: 280px) and (max-width: 980px) {
-    height: 20rem; /* Adjusted height for smaller screens */
+    height: 20rem; 
     .background {
-      height: 60%; /* Adjusted video height for mobile */
+      height: 60%; 
     }
     .content {
       .title {
