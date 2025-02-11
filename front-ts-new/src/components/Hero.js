@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import video1 from "../assets/video1.mp4";
-import video2 from "../assets/video2.mp4";
-import video3 from "../assets/video3.mp4";
-
+import video1 from "../assets/vid1_hinduism.mp4";
+import video2 from "../assets/vid2_christain.mp4";
+import video3 from "../assets/vid3_sikhism.mp4";
+import video4 from "../assets/vid4_jainism.mp4";
+import video5 from "../assets/vid5_islam.mp4";
+import video6 from "../assets/vid6_buddhism.mp4";
 export default function Hero() {
-  const videos = [video1, video2, video3];
+  const videos = [video1, video2, video3,video4,video5,video6];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
