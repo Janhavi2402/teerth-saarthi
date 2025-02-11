@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import video1 from "../assets/vid1_hinduism.mp4";
-import video2 from "../assets/vid2_christain.mp4";
+import video2 from "../assets/vid2_christian.mp4";
 import video3 from "../assets/vid3_sikhism.mp4";
 import video4 from "../assets/vid4_jainism.mp4";
 import video5 from "../assets/vid5_islam.mp4";
@@ -10,10 +10,11 @@ export default function Hero() {
   const videos = [video1, video2, video3,video4,video5,video6];
   const [currentIndex, setCurrentIndex] = useState(0);
 
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
-    }, 10000); // Change video every 10 seconds
+    }, 5000); // Change video every 5 seconds
 
     return () => clearInterval(interval); // Cleanup on component unmount
   }, [videos.length]);

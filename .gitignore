@@ -5,3 +5,4 @@ front-ts-new/node_modules/
 # Ignore environment files
 .env
 .DS_Store
+my-app/node_modules
