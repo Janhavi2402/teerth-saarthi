@@ -18,7 +18,7 @@ export default function Hero() {
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
         setFade(true); // Start fade in effect
-      }, 800); // Delay transition to match fade effect
+      }, 500); // Delay transition to match fade effect
     }, 5000);
 
     return () => clearInterval(interval);
@@ -38,12 +38,12 @@ export default function Hero() {
       </div>
       <div className="content">
         <div className="title">
-          <h1>TRAVEL TO EXPLORE</h1>
+          {/* <h1>TRAVEL TO EXPLORE</h1>
           <p>
             Embark on a journey of faith and discovery. Explore sacred sites
             across the country, experience their spiritual essence, and uncover
             stories that transcend time.
-          </p>
+          </p> */}
         </div>
       </div>
     </Section>

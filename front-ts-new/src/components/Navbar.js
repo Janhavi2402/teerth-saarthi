@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import logo from "../assets/logo.png";
+import logo from "../assets/teerth_saarthi_logo.png";
 
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
@@ -76,7 +76,7 @@ export default function Navbar() {
     <>
       <nav style={navStyle}>
         <div style={brandStyle}>
-        <img  src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" style={{ width: '125px', height: 'auto' }} />
           TEERTH-SAARTHI
           <div>
             {navbarState ? (
