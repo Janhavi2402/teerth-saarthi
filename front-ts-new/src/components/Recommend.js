@@ -70,8 +70,12 @@ export default function Recommend() {
                 className="destination"
                 onClick={() => handleCardClick(destination.route)}
               >
-                <img src={destination.image} alt={destination.title} />
-                <h3>{destination.title}</h3>
+                {/* Image inside a div for better styling */}
+                <div className="image-container">
+                  <img src={destination.image} alt={destination.title} />
+                </div>
+                {/* Title moved below image */}
+                <h3>{destination.title}</h3>  
               </div>
             </SwiperSlide>
           ))}
@@ -83,11 +87,9 @@ export default function Recommend() {
 
 const Section = styled.section`
   padding: 2rem 0;
- 
 
   .title {
     text-align: center;
-    
   }
 
   .packages {
@@ -120,37 +122,47 @@ const Section = styled.section`
     padding: 0 3rem;
 
     .destination {
-      position: relative; /* Set relative positioning for the container */
-      background-color: #8338ec14;
+      position: relative;
+      background-color:rgba(120, 157, 181, 0.57);
       width: 300px;
       height: 400px;
       text-align: center;
-      transition: 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       overflow: hidden;
 
       &:hover {
-        transform: translateY(-1rem);
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        transform: translateY(-10px); /* Move entire card up */
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 20px;
+      }
+
+      .image-container {
+        width: 100%;
+        height: 85%; /* Image takes most of the space */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease-in-out; /* Smooth hover effect */
       }
 
       img {
-        
         width: 100%;
         height: 100%;
-        object-fit: fit; /* Ensure the image covers the container */
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
       }
 
       h3 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color:white;
+        margin-top: 10px;
         font-size: 1.5rem;
         font-weight: bold;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        z-index: 1; /* Ensure it appears above the image */
-        pointer-events: none; /* Prevent hover effects on the text */
+        color: black;
+        text-align: center;
+        transition: transform 0.3s ease-in-out; /* Title moves up like image */
+      }
+
+      &:hover .image-container, 
+      &:hover h3 {
+        transform: translateY(-10px); /* Move both image and title up */
       }
     }
   }
@@ -161,3 +173,4 @@ const Section = styled.section`
     }
   }
 `;
+
