@@ -7,12 +7,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import hinduism from "../assets/hinduism.jpg";
-import christian from "../assets/christian.jpg";
-import islam from "../assets/islam.jpg";
-import jainism from "../assets/jainism.jpg";
-import buddhism from "../assets/buddhism.jpg";
-import sikhism from "../assets/sikhism.jpg";
+import hinduism from "../assets/Images_final2_teerth_saarthi/hinduism_final.jpg";
+import christian from "../assets/Images_final2_teerth_saarthi/christianity_final.jpg";
+import islam from "../assets/Images_final2_teerth_saarthi/islam_final.jpg";
+import jainism from "../assets/Images_final2_teerth_saarthi/jainism_final.jpg";
+import buddhism from "../assets/Images_final2_teerth_saarthi/buddhism_final.jpg";
+import sikhism from "../assets/Images_final2_teerth_saarthi/sikhism_final.jpg";
 
 export default function Recommend() {
   const navigate = useNavigate(); // Hook for navigation
