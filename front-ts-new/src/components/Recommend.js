@@ -26,8 +26,9 @@ export default function Recommend() {
     { image: sikhism, title: "Sikhism", route: "/religion_list/sikhism" },
   ];
 
-  const packages = ["Choose Religion", "Famous places"];
-  const [active, setActive] = useState(1);
+  // Commented out the packages array and active state
+  // const packages = ["Choose Religion", "Famous places"];
+  // const [active, setActive] = useState(1);
 
   const handleCardClick = (route) => {
     navigate(route); 
@@ -35,10 +36,13 @@ export default function Recommend() {
 
   return (
     <Section id="recommend">
-      <div className="title">
+      {/* Commented out the title section */}
+      {/* <div className="title">
         <h2>PLACES</h2>
-      </div>
-      <div className="packages">
+      </div> */}
+
+      {/* Commented out the packages section */}
+      {/* <div className="packages">
         <ul>
           {packages.map((pkg, index) => (
             <li
@@ -50,7 +54,8 @@ export default function Recommend() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
+
       <div className="destinations">
         <Swiper
           spaceBetween={10}
@@ -70,7 +75,6 @@ export default function Recommend() {
                 className="destination"
                 onClick={() => handleCardClick(destination.route)}
               >
-                
                 <div className="image-container">
                   <img src={destination.image} alt={destination.title} />
                 </div>
@@ -83,6 +87,7 @@ export default function Recommend() {
     </Section>
   );
 }
+
 
 const Section = styled.section`
   padding: 2rem 0;
