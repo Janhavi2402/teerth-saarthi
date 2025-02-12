@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -15,7 +15,7 @@ import buddhism from "../assets/Images_final2_teerth_saarthi/buddhism_final.jpg"
 import sikhism from "../assets/Images_final2_teerth_saarthi/sikhism_final.jpg";
 
 export default function Recommend() {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const data = [
     { image: hinduism, title: "Hinduism", route: "/religion_list/hinduism" },
@@ -30,7 +30,7 @@ export default function Recommend() {
   const [active, setActive] = useState(1);
 
   const handleCardClick = (route) => {
-    navigate(route); // Navigate to the selected religion's page
+    navigate(route); 
   };
 
   return (
@@ -70,11 +70,10 @@ export default function Recommend() {
                 className="destination"
                 onClick={() => handleCardClick(destination.route)}
               >
-                {/* Image inside a div for better styling */}
+                
                 <div className="image-container">
                   <img src={destination.image} alt={destination.title} />
                 </div>
-                {/* Title moved below image */}
                 <h3>{destination.title}</h3>  
               </div>
             </SwiperSlide>

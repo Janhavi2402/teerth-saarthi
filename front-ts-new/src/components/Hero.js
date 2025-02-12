@@ -14,11 +14,11 @@ export default function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // Start fade out effect
+      setFade(false);
       setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
-        setFade(true); // Start fade in effect
-      }, 500); // Delay transition to match fade effect
+        setFade(true); 
+      }, 500);
     }, 5000);
 
     return () => clearInterval(interval);
