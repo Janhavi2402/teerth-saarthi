@@ -10,6 +10,8 @@ export default function Navbar() {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: "0.5rem 1rem", 
+    height: "60px", 
   };
 
   const brandStyle = {
@@ -76,7 +78,7 @@ export default function Navbar() {
     <>
       <nav style={navStyle}>
         <div style={brandStyle}>
-        <img src={logo} alt="Logo" style={{ width: '125px', height: 'auto' }} />
+        <img src={logo} alt="Logo" style={{ width: '105px', height: 'auto' }} />
           TEERTH-SAARTHI
           <div>
             {navbarState ? (
