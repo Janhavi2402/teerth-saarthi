@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaUserAlt } from "react-icons/fa"; // Human icon from React Icons
+import { FaUserAlt } from "react-icons/fa"; 
 
 export default function Testimonials() {
   const testimonialsData = [
@@ -15,7 +15,7 @@ export default function Testimonials() {
       role: "Spiritual Explorer",
     },
     {
-      text: "An incredible platform for discovering holy sites across different religions. The information is both educational and enriching, helping me understand diverse spiritual practices. 🕉️✨",
+      text: "An incredible platform for discovering holy sites across different religions. The information is both educational and enriching, helping me understand diverse spiritual practices. ",
       name: "Amina Fatima",
       role: "Cultural Enthusiast",
     },
@@ -24,7 +24,7 @@ export default function Testimonials() {
   return (
     <Section id="testimonials">
       <div className="title">
-        <h2>Happy Customers</h2>
+        <h2>Satisfied Pilgrims</h2>
       </div>
       <div className="testimonials">
         {testimonialsData.map((testimonial, index) => (

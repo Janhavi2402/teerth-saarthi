@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const ulStyle = {
     display: "flex",
-    gap: "1rem",
+    gap: "3.5rem",
     listStyleType: "none",
   };
 
