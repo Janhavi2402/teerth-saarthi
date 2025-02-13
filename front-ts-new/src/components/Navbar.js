@@ -11,7 +11,7 @@ export default function Navbar() {
     justifyContent: "space-between",
     alignItems: "center",
     padding: "0.5rem 1rem", 
-    height: "60px", 
+    height: "75px", 
   };
 
   const brandStyle = {
@@ -95,17 +95,17 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#services" style={linkStyle}>
+            <a href="#services" style={activeLinkStyle}>
               About
             </a>
           </li>
           <li>
-            <a href="#recommend" style={linkStyle}>
+            <a href="#recommend" style={activeLinkStyle}>
               places
             </a>
           </li>
           <li>
-            <a href="#testimonials" style={linkStyle}>
+            <a href="#testimonials" style={activeLinkStyle}>
               Testimonials
             </a>
           </li>

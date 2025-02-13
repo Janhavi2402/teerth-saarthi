@@ -64,7 +64,7 @@ export default function Recommend() {
           navigation={true}
           modules={[Pagination, Navigation]}
           breakpoints={{
-            280: { slidesPerView: 1, spaceBetween: 5 },
+            280: { slidesPerView: 1, spaceBetween: 10 },
             768: { slidesPerView: 2, spaceBetween: 10 },
             1024: { slidesPerView: 3, spaceBetween: 10 },
           }}
@@ -92,42 +92,13 @@ export default function Recommend() {
 const Section = styled.section`
   padding: 2rem 0;
 
-  .title {
-    text-align: center;
-  }
-
-  .packages {
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0;
-
-    ul {
-      display: flex;
-      list-style-type: none;
-      width: max-content;
-
-      li {
-        padding: 1rem 2rem;
-        border-bottom: 0.1rem solid black;
-        cursor: pointer;
-
-        &:hover {
-          color: #8338ec;
-        }
-      }
-
-      .active {
-        border-bottom: 0.5rem solid #8338ec;
-      }
-    }
-  }
-
   .destinations {
     padding: 0 3rem;
 
     .destination {
+    margin-left:75px;
       position: relative;
-      background-color:rgba(120, 157, 181, 0.57);
+      background-color: rgba(120, 157, 181, 0.57);
       width: 300px;
       height: 400px;
       text-align: center;
@@ -135,17 +106,17 @@ const Section = styled.section`
       overflow: hidden;
 
       &:hover {
-        transform: translateY(-10px); /* Move entire card up */
+        transform: translateY(-10px);
         box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 20px;
       }
 
       .image-container {
         width: 100%;
-        height: 85%; /* Image takes most of the space */
+        height: 85%;
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+        transition: transform 0.3s ease-in-out;
       }
 
       img {
@@ -161,14 +132,32 @@ const Section = styled.section`
         font-weight: bold;
         color: black;
         text-align: center;
-        transition: transform 0.3s ease-in-out; /* Title moves up like image */
+        transition: transform 0.3s ease-in-out;
       }
 
       &:hover .image-container, 
       &:hover h3 {
-        transform: translateY(-10px); /* Move both image and title up */
+        transform: translateY(-10px);
       }
     }
+  }
+
+  .swiper-pagination {
+    position: relative;
+    margin-top: 35px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #8338ec;
+    opacity: 1;
   }
 
   @media screen and (min-width: 280px) and (max-width: 768px) {
@@ -177,4 +166,3 @@ const Section = styled.section`
     }
   }
 `;
-
