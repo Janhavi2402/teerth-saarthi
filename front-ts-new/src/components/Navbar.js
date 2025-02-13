@@ -101,7 +101,7 @@ export default function Navbar() {
           </li>
           <li>
             <a href="#recommend" style={activeLinkStyle}>
-              places
+              Religions/Places
             </a>
           </li>
           <li>
