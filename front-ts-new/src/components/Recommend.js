@@ -20,10 +20,10 @@ export default function Recommend() {
   const data = [
     { image: hinduism, title: "Hinduism", route: "/religion_list/hinduism" },
     { image: christian, title: "Christianity", route: "/religion_list/christianity" },
-    { image: islam, title: "Islam", route: "/religion_list/islam" },
-    { image: buddhism, title: "Buddhism", route: "/religion_list/buddhism" },
     { image: jainism, title: "Jainism", route: "/religion_list/jainism" },
+    { image: islam, title: "Islam", route: "/religion_list/islam" },
     { image: sikhism, title: "Sikhism", route: "/religion_list/sikhism" },
+    { image: buddhism, title: "Buddhism", route: "/religion_list/buddhism" },
   ];
 
   // Commented out the packages array and active state
