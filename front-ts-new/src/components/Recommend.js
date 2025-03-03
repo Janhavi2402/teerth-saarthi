@@ -2,43 +2,47 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import hinduism from "../assets/hinduism.jpg";
-import christian from "../assets/christian.jpg";
-import islam from "../assets/islam.jpg";
-import jainism from "../assets/jainism.jpg";
-import buddhism from "../assets/buddhism.jpg";
-import sikhism from "../assets/sikhism.jpg";
+import hinduism from "../assets/Images_final2_teerth_saarthi/hinduism_final.jpg";
+import christian from "../assets/Images_final2_teerth_saarthi/christianity_final.jpg";
+import islam from "../assets/Images_final2_teerth_saarthi/islam_final.jpg";
+import jainism from "../assets/Images_final2_teerth_saarthi/jainism_final.jpg";
+import buddhism from "../assets/Images_final2_teerth_saarthi/buddhism_final.jpg";
+import sikhism from "../assets/Images_final2_teerth_saarthi/sikhism_final.jpg";
 
 export default function Recommend() {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const data = [
     { image: hinduism, title: "Hinduism", route: "/religion_list/hinduism" },
     { image: christian, title: "Christianity", route: "/religion_list/christianity" },
-    { image: islam, title: "Islam", route: "/religion_list/islam" },
-    { image: buddhism, title: "Buddhism", route: "/religion_list/buddhism" },
     { image: jainism, title: "Jainism", route: "/religion_list/jainism" },
+    { image: islam, title: "Islam", route: "/religion_list/islam" },
     { image: sikhism, title: "Sikhism", route: "/religion_list/sikhism" },
+    { image: buddhism, title: "Buddhism", route: "/religion_list/buddhism" },
   ];
 
-  const packages = ["Choose Religion", "Famous places"];
-  const [active, setActive] = useState(1);
+  // Commented out the packages array and active state
+  // const packages = ["Choose Religion", "Famous places"];
+  // const [active, setActive] = useState(1);
 
   const handleCardClick = (route) => {
-    navigate(route); // Navigate to the selected religion's page
+    navigate(route); 
   };
 
   return (
     <Section id="recommend">
-      <div className="title">
+      {/* Commented out the title section */}
+      {/* <div className="title">
         <h2>PLACES</h2>
-      </div>
-      <div className="packages">
+      </div> */}
+
+      {/* Commented out the packages section */}
+      {/* <div className="packages">
         <ul>
           {packages.map((pkg, index) => (
             <li
@@ -50,7 +54,8 @@ export default function Recommend() {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
+
       <div className="destinations">
         <Swiper
           spaceBetween={10}
@@ -59,7 +64,7 @@ export default function Recommend() {
           navigation={true}
           modules={[Pagination, Navigation]}
           breakpoints={{
-            280: { slidesPerView: 1, spaceBetween: 5 },
+            280: { slidesPerView: 1, spaceBetween: 10 },
             768: { slidesPerView: 2, spaceBetween: 10 },
             1024: { slidesPerView: 3, spaceBetween: 10 },
           }}
@@ -70,8 +75,10 @@ export default function Recommend() {
                 className="destination"
                 onClick={() => handleCardClick(destination.route)}
               >
-                <img src={destination.image} alt={destination.title} />
-                <h3>{destination.title}</h3>
+                <div className="image-container">
+                  <img src={destination.image} alt={destination.title} />
+                </div>
+                <h3>{destination.title}</h3>  
               </div>
             </SwiperSlide>
           ))}
@@ -81,78 +88,76 @@ export default function Recommend() {
   );
 }
 
+
 const Section = styled.section`
   padding: 2rem 0;
- 
-
-  .title {
-    text-align: center;
-    
-  }
-
-  .packages {
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0;
-
-    ul {
-      display: flex;
-      list-style-type: none;
-      width: max-content;
-
-      li {
-        padding: 1rem 2rem;
-        border-bottom: 0.1rem solid black;
-        cursor: pointer;
-
-        &:hover {
-          color: #8338ec;
-        }
-      }
-
-      .active {
-        border-bottom: 0.5rem solid #8338ec;
-      }
-    }
-  }
 
   .destinations {
     padding: 0 3rem;
 
     .destination {
-      position: relative; /* Set relative positioning for the container */
-      background-color: #8338ec14;
+    margin-left:75px;
+      position: relative;
+      background-color: rgba(120, 157, 181, 0.57);
       width: 300px;
       height: 400px;
       text-align: center;
-      transition: 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       overflow: hidden;
 
       &:hover {
-        transform: translateY(-1rem);
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        transform: translateY(-10px);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 20px;
+      }
+
+      .image-container {
+        width: 100%;
+        height: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease-in-out;
       }
 
       img {
-        
         width: 100%;
         height: 100%;
-        object-fit: fit; /* Ensure the image covers the container */
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
       }
 
       h3 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color:white;
+        margin-top: 10px;
         font-size: 1.5rem;
         font-weight: bold;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        z-index: 1; /* Ensure it appears above the image */
-        pointer-events: none; /* Prevent hover effects on the text */
+        color: black;
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      &:hover .image-container, 
+      &:hover h3 {
+        transform: translateY(-10px);
       }
     }
+  }
+
+  .swiper-pagination {
+    position: relative;
+    margin-top: 35px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #8338ec;
+    opacity: 1;
   }
 
   @media screen and (min-width: 280px) and (max-width: 768px) {
