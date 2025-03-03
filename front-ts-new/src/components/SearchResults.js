@@ -23,7 +23,7 @@ export default function SearchResults() {
           setLoading(false);
         })
         .catch(() => {
-          setError("Failed to fetch temples.");
+          setError("Failed to fetch the pilgrim sites.");
           setLoading(false);
         });
     }
@@ -46,7 +46,7 @@ export default function SearchResults() {
 
       <input
         type="text"
-        placeholder="Search temples..."
+        placeholder="Search pilgrims..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className="search-bar"
