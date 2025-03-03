@@ -1,25 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
+require("dotenv").config(); // Load environment variables
 
-
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const templeRoutes = require("./routes/templeRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
 app.use(cors());
-app.use(express.json()); // Parses JSON requests
+app.use(express.json());
 
-// Sample Route
-app.get('/', (req, res) => {
-    res.send('Backend is working!');
-});
+app.use("/api/temples", templeRoutes);
 
-// API Routes
-app.use('/api', userRoutes);
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000, // Timeout if MongoDB server is unreachable
+  })
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// Start the Server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
