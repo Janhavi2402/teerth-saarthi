@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import logo from "../assets/logo.png";
+import logo from "../assets/teerth_saarthi_logo.png";
 
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
@@ -10,6 +10,8 @@ export default function Navbar() {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: "0.5rem 1rem", 
+    height: "75px", 
   };
 
   const brandStyle = {
@@ -24,7 +26,7 @@ export default function Navbar() {
 
   const ulStyle = {
     display: "flex",
-    gap: "1rem",
+    gap: "3.5rem",
     listStyleType: "none",
   };
 
@@ -76,7 +78,7 @@ export default function Navbar() {
     <>
       <nav style={navStyle}>
         <div style={brandStyle}>
-        <img  src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" style={{ width: '105px', height: 'auto' }} />
           TEERTH-SAARTHI
           <div>
             {navbarState ? (
@@ -93,17 +95,17 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#services" style={linkStyle}>
+            <a href="#services" style={activeLinkStyle}>
               About
             </a>
           </li>
           <li>
-            <a href="#recommend" style={linkStyle}>
-              places
+            <a href="#recommend" style={activeLinkStyle}>
+              Religions/Places
             </a>
           </li>
           <li>
-            <a href="#testimonials" style={linkStyle}>
+            <a href="#testimonials" style={activeLinkStyle}>
               Testimonials
             </a>
           </li>

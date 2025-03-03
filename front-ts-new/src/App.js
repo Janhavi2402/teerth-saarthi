@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
@@ -7,15 +7,16 @@ import Recommend from "./components/Recommend";
 import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
-import Hinduism from "./components/religion_list/hinduism";
-import Christianity from "./components/religion_list/christianity";
-import Islam from "./components/religion_list/islam";
-import Buddhism from "./components/religion_list/buddhism";
-import Jainism from "./components/religion_list/jainism";
-import Sikhism from "./components/religion_list/sikhism";
+import SearchResults from "./components/SearchResults";
 import scrollreveal from "scrollreveal";
+import PlacePage from "./components/PlacePage";
 
-export default function App() {
+function Layout() {
+  const location = useLocation();
+  const showNavbar = location.pathname === "/"; // Only show navbar on the home page
+
+
+
   useEffect(() => {
     // Scroll Reveal Animation
     const sr = scrollreveal({
@@ -25,19 +26,16 @@ export default function App() {
       reset: true,
     });
 
-    sr.reveal(
-      `nav, #hero, #services, #recommend, #testimonials, footer`,
-      {
-        opacity: 0,
-        interval: 300,
-      }
-    );
-  }, []); // Dependency array to run effect only once
+    sr.reveal(`nav, #hero, #services, #recommend, #testimonials, footer`, {
+      opacity: 0,
+      interval: 300,
+    });
+  }, []);
 
   return (
-    <Router>
+    <>
       <ScrollToTop />
-      <Navbar />
+      {showNavbar && <Navbar />}
       <Routes>
         <Route
           path="/"
@@ -51,13 +49,17 @@ export default function App() {
             </>
           }
         />
-        <Route path="/religion_list/hinduism" element={<Hinduism />} />
-        <Route path="/religion_list/christianity" element={<Christianity />} />
-        <Route path="/religion_list/islam" element={<Islam />} />
-        <Route path="/religion_list/buddhism" element={<Buddhism />} />
-        <Route path="/religion_list/jainism" element={<Jainism />} />
-        <Route path="/religion_list/sikhism" element={<Sikhism />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/place/:id" element={<PlacePage />} />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Layout />
     </Router>
   );
 }

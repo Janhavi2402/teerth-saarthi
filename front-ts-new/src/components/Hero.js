@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import video1 from "../assets/video1.mp4";
-import video2 from "../assets/video2.mp4";
-import video3 from "../assets/video3.mp4";
+import video1 from "../assets/vid1_hinduism_new.mp4";
+import video2 from "../assets/vid2_christian_new.mp4";
+import video3 from "../assets/vid3_sikhism_new.mp4";
+import video4 from "../assets/vid4_jainism_new.mp4";
+import video5 from "../assets/vid5_islam_new.mp4";
+import video6 from "../assets/vid6_buddhism_new.mp4";
 
 export default function Hero() {
-  const videos = [video1, video2, video3];
+  const videos = [video1, video2, video3, video4, video5, video6];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
-    }, 10000); // Change video every 10 seconds
+      setFade(false);
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
+        setFade(true); 
+      }, 500);
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount
-  }, [videos.length]);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Section id="hero">
@@ -25,20 +33,19 @@ export default function Hero() {
           muted
           loop
           playsInline
-          key={currentIndex}
+          className={fade ? "fade-in" : "fade-out"}
         />
       </div>
       <div className="content">
         <div className="title">
-          <h1>TRAVEL TO EXPLORE</h1>
+          {/* <h1>TRAVEL TO EXPLORE</h1>
           <p>
             Embark on a journey of faith and discovery. Explore sacred sites
             across the country, experience their spiritual essence, and uncover
             stories that transcend time.
-          </p>
+          </p> */}
         </div>
-        </div>
-       
+      </div>
     </Section>
   );
 }
@@ -48,14 +55,14 @@ const Section = styled.section`
   margin-top: 0.5rem;
   padding-bottom: 1rem;
   width: 100%;
-  height: 60rem; /* Reduced height of the section */
+  height: 60rem;
 
   .background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 70%; /* Adjusted to make the video height smaller */
+    height: 70%;
     z-index: 1;
 
     video {
@@ -63,7 +70,15 @@ const Section = styled.section`
       height: 100%;
       object-fit: cover;
       filter: brightness(60%);
-      transition: opacity 1s ease-in-out; /* Smooth fade effect */
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .fade-in {
+      opacity: 1;
+    }
+    
+    .fade-out {
+      opacity: 0;
     }
   }
 
@@ -95,9 +110,9 @@ const Section = styled.section`
   }
 
   @media screen and (min-width: 280px) and (max-width: 980px) {
-    height: 20rem; /* Adjusted height for smaller screens */
+    height: 20rem;
     .background {
-      height: 60%; /* Adjusted video height for mobile */
+      height: 60%;
     }
     .content {
       .title {
@@ -112,3 +127,5 @@ const Section = styled.section`
     }
   }
 `;
+
+
