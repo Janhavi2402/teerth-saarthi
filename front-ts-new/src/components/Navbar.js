@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import logo from "../assets/teerth_saarthi_logo.png";
-
+import { useNavigate } from 'react-router-dom';
 export default function Navbar() {
+  const navigate = useNavigate();
   const [navbarState, setNavbarState] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem('token')); // Update when token changes
+    };
 
+    window.addEventListener("storage", handleStorageChange); // Listen for storage changes
+    return () => window.removeEventListener("storage", handleStorageChange); // Cleanup
+  }, []);
+  
+
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove user data
+    setIsLoggedIn(false);  // Update state
+    navigate("/");  // Redirect to home
+  };
   const navStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -110,6 +127,7 @@ export default function Navbar() {
             </a>
           </li>
         </ul>
+        {!isLoggedIn && (
         <div style={{ display: "flex", gap: "0.5rem" }}>
         <button
   style={buttonStyle}
@@ -121,7 +139,7 @@ export default function Navbar() {
     e.target.style.backgroundColor = "#48cae4";
     e.target.style.transform = "scale(1) translateY(0)";
   }}
->
+  onClick={() => navigate('/login')}>
   Sign in
 </button>
 <button
@@ -134,10 +152,19 @@ export default function Navbar() {
     e.target.style.backgroundColor = "#48cae4";
     e.target.style.transform = "scale(1) translateY(0)";
   }}
->
+  onClick={() => navigate('/signup')}>
   Sign up
 </button>
         </div>
+         )}
+          {isLoggedIn && (
+          <button
+            style={{ backgroundColor: "#d9534f", padding: "0.5rem 1rem", borderRadius: "1rem", border: "none", color: "white", fontSize: "1.1rem", cursor: "pointer" }}
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        )}
       </nav>
       <div style={responsiveNavStyle}>
         <ul style={responsiveUlStyle}>
