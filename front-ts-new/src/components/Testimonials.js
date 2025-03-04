@@ -7,7 +7,7 @@ export default function Testimonials() {
     {
       text: "This website has been a game changer for planning our spiritual journeys! 🙏✨ The insights and resources have helped us explore sacred sites like never before. Highly recommended! 🌍",
       name: "Priya Desai",
-      role: "Traveler",
+      role: "Traveller",
     },
     {
       text: "I absolutely love how easy it is to discover new places of worship and spiritual significance. This site is a true blessing for anyone looking to deepen their faith through travel. 🙌💖",

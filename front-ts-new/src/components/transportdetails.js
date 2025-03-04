@@ -26,7 +26,7 @@ const TransportDetails = ({ templeId }) => {
     fetchTransportDetails();
   }, [templeId]);
 
-  if (loading) return <p className="text-center text-gray-600">Fetching transport details...</p>;
+  if (loading) return <p className="text-center text-gray-600">Fetching the transport details...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (

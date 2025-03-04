@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const HowToReachSchema = new mongoose.Schema({
   temple_id: { 
     type: mongoose.Schema.Types.ObjectId, 

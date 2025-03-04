@@ -10,7 +10,6 @@ const NearbyAttractionsSchema = new mongoose.Schema({
     }
   ]
 });
-
 module.exports = mongoose.model("NearbyAttractions", NearbyAttractionsSchema);
 
 

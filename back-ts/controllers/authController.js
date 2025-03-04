@@ -1,48 +1,34 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.js");
-require("dotenv").config(); // Load environment variables
+require("dotenv").config(); 
 
-const secretKey = process.env.JWT_SECRET; // Load from .env
+const secretKey = process.env.JWT_SECRET;
 
 const registerUser = async (req, res) => {
   try {
     console.log("Incoming Request:", req.body); 
     const { name, email, password, confirm } = req.body;
-
-    // Check for missing fields
     if (!name || !email || !password || !confirm) {
       return res.status(400).json({ message: "All fields are required" });
     }
-
-    // Ensure passwords match
     if (password !== confirm) {
       return res.status(400).json({ message: "Passwords do not match" });
     }
-
-    // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       
       return res.status(400).json({ message: "User already exists" });
     }
-
-    // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Create new user
     const user = await User.create({ name, email, password: hashedPassword });
 
     
     if (!user) {
       return res.status(500).json({ message: "User registration failed" });
     }
-
-    // Generate JWT Token
     const token = jwt.sign({ email: user.email }, secretKey);
-
-    // Set token as cookie
     res.cookie("token", token);
 
     console.log("User registered successfully");
@@ -53,8 +39,6 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: "Error registering user", error: error.message });
   }
 };
-
-
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -73,7 +57,6 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: "Error logging in", error: error.message });
   }
 };
-
 const logoutUser = (req, res) => {
   res.cookie("token", "", { expires: new Date(0), httpOnly: true });
   res.json({ message: "Logged out successfully" });

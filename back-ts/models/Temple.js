@@ -8,7 +8,7 @@ const TempleSchema = new mongoose.Schema({
   description: { type: String },
 
   timings: {
-    type: Object, // ✅ Change Map to Object to allow nested structures
+    type: Object,
   },
 
   visiting_info: {
@@ -24,14 +24,14 @@ const TempleSchema = new mongoose.Schema({
   art_architecture: { type: String },
 
   contact: {
-    phone_numbers: { type: [String], default: [] }, // ✅ Ensures an array, even if empty
+    phone_numbers: { type: [String], default: [] }, 
     email: { 
       type: String, 
-      match: [/^\S+@\S+\.\S+$/, "Invalid email format"] // ✅ Email validation
+      match: [/^\S+@\S+\.\S+$/, "Invalid email format"] 
     },
     official_website: { 
       type: String, 
-      match: [/^https?:\/\/.+/, "Invalid URL format"] // ✅ Ensures valid website URL
+      match: [/^https?:\/\/.+/, "Invalid URL format"] 
     },
   },
   nearby_places: [
@@ -40,8 +40,6 @@ const TempleSchema = new mongoose.Schema({
       distance_km: { type: Number, required: true },
       description: { type: String },
     },
-  ], // ✅ Added nearby places with validation
+  ], 
 });
-
-
 module.exports = mongoose.model("Temple", TempleSchema);

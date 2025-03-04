@@ -15,7 +15,7 @@ import Signup from "./components/authentication/signup";
 import TransportDetails from "./components/transportdetails";
 import WhereToStayPage from "./components/wheretostay";
 import NearbyAttractionsPage from "./components/nearbyattraction";
-// Extract templeId from URL and pass it as a prop
+
 const TransportDetailsWrapper = () => {
   const { templeId } = useParams();
   return <TransportDetails templeId={templeId} />;
@@ -24,7 +24,6 @@ const TransportDetailsWrapper = () => {
 function App() {
   const location = useLocation();
   
-  // Only show Navbar on the home page and exclude it from place pages
   const showNavbar = location.pathname === "/" || 
                     (!location.pathname.startsWith("/place/") && 
                      !location.pathname.startsWith("/transport/") &&

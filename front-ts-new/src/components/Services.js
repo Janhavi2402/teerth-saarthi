@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import service1 from "../assets/service1.png"; // Replace with your own icons
+import service1 from "../assets/service1.png"; 
 import service2 from "../assets/service2.png";
 import service3 from "../assets/service3.png";
 import service4 from "../assets/service4.png";
@@ -9,27 +9,27 @@ export default function Services() {
   const data = [
     {
       icon: service1,
-      title: "Best Prices for Religious Travel",
+      title: "All-in-One Pilgrimage Guide",
       subTitle:
-        "Book through our platform for affordable prices on religious sites and pilgrimage tours.",
+        "A comprehensive platform providing transport, accommodation, and nearby attractions in one place for hassle-free pilgrimage planning.",
     },
     {
       icon: service2,
-      title: "24/7 Support for Pilgrims",
+      title: "Verified & Affordable Stays",
       subTitle:
-        "Our dedicated team is available around the clock to assist you with all your religious travel needs, ensuring a seamless experience.",
+        "Curated listings of dharamshalas, hotels, and guest houses with user reviews and budget-friendly options.",
     },
     {
       icon: service3,
-      title: "Flexible Payment Options",
+      title: "Spiritual & Cultural Insights",
       subTitle:
-        "Pay for your religious travel packages in easy installments with our flexible payment plans, making it easier for you to plan your pilgrimage.",
+        "Detailed guides on temple timings, rituals, dos & don'ts, and local traditions.",
     },
     {
       icon: service4,
-      title: "Tailored Religious Journeys",
+      title: "Nearby Spiritual & Cultural Attractions",
       subTitle:
-        "Find customized religious tours based on your faith, preferences, and desired destinations, with a personal guide to lead the way.",
+        "Recommends nearby temples, historical sites, and cultural landmarks to enrich the pilgrimage experience.",
     },
   ];
 
@@ -62,8 +62,8 @@ const Section = styled.section`
     flex-direction: column;
     gap: 1rem;
     padding: 1.5rem;
-    background-color: #f0f8ff;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color:rgba(130, 162, 183, 0.57);//here
+    box-shadow: rgba(110, 110, 207, 0.2) 0px 7px 29px 0px;
     transition: 0.3s ease-in-out;
 
     &:hover {
@@ -75,6 +75,7 @@ const Section = styled.section`
       img {
         height: 3rem;
         width: 3rem;
+        object-fit: contain;
       }
     }
   }

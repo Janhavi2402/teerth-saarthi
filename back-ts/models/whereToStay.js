@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const WhereToStaySchema = new mongoose.Schema({
   temple_id: { 
     type: mongoose.Schema.Types.ObjectId, 
@@ -17,4 +16,4 @@ const WhereToStaySchema = new mongoose.Schema({
   website_url: { type: String, required: true, match: [/^https?:\/\/.+/, "Invalid URL format"] }
 }, { timestamps: true });
 
-module.exports = mongoose.model("WhereToStay", WhereToStaySchema); // ✅ Ensure correct capitalization
+module.exports = mongoose.model("WhereToStay", WhereToStaySchema); 

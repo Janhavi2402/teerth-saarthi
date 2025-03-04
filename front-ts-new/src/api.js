@@ -1,15 +1,10 @@
 
 import axios from "axios";
-
 const API_BASE_URL = "http://localhost:5000/api";
-
 export const fetchTemplesByReligion = async (religion) => {
   const response = await fetch(`${API_BASE_URL}/temples/search?religion=${encodeURIComponent(religion)}`);
   return response.json();
 };
-
-
-
 export async function fetchTempleById(id) {
     try {
       const response = await fetch(`http://localhost:5000/api/temples/${id}`);
@@ -22,8 +17,6 @@ export async function fetchTempleById(id) {
       return null;
     }
   };
-  
-
   export const fetchNearbyPlaces = async (id) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/temples/${id}/nearby-places`);

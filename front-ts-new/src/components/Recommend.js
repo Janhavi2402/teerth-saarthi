@@ -30,10 +30,10 @@ export default function Recommend() {
 
   
   return (
-    <Section>
-      <div className="title">
-        <h2>Select Religion</h2>
-      </div>
+    <Section><br>
+    </br>
+    <br>
+    </br>
       <div className="destinations">
         <Swiper spaceBetween={10} slidesPerView={3} pagination={{ clickable: true }} navigation={true} modules={[Pagination, Navigation]}>
           {religions.map((item, index) => (
