@@ -2,6 +2,7 @@
   const Temple = require("../models/Temple");
   const NearbyAttractions = require("../models/nearbyAttractions");
 
+  const mongoose = require("mongoose");
   const router = express.Router();
 
   // GET temples by religion
@@ -21,25 +22,28 @@
     }
   });
 
-  // ✅ Corrected Route: GET temple by ID
-  router.get("/:id", async (req, res) => {
-    try {
-      const templeId = req.params.id;
-      const temple = await Temple.findById(templeId).select("name address religion");
-      if (!temple) {
-        return res.status(404).json({ error: "Temple not found" });
-      }
-      const nearbyAttractions = await NearbyAttractions.findOne({ temple_id: templeId });
 
-      res.json({
-        temple,
-        attractions: nearbyAttractions ? nearbyAttractions.attractions : [],
-      });
-  
-    } catch (error) {
-      res.status(500).json({ message: "Server Error" });
+router.get("/:id", async (req, res) => {
+  try {
+    const templeId = req.params.id;
+
+    // Validate and convert to ObjectId
+    if (!mongoose.Types.ObjectId.isValid(templeId)) {
+      return res.status(400).json({ error: "Invalid Temple ID format" });
     }
-  });
 
+    const temple = await Temple.findById(req.params.id); // ✅ Convert Mongoose object to plain JSON
 
+    if (!temple) {
+      return res.status(404).json({ error: "Temple not found" });
+    }
+
+    console.log(temple); // ✅ Logs full data
+    res.json(temple);
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+});
+
+  
   module.exports = router;
