@@ -34,6 +34,14 @@ const TempleSchema = new mongoose.Schema({
       match: [/^https?:\/\/.+/, "Invalid URL format"] // ✅ Ensures valid website URL
     },
   },
+  nearby_places: [
+    {
+      name: { type: String, required: true },
+      distance_km: { type: Number, required: true },
+      description: { type: String },
+    },
+  ], // ✅ Added nearby places with validation
 });
+
 
 module.exports = mongoose.model("Temple", TempleSchema);
