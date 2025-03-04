@@ -1,3 +1,6 @@
+
+import axios from "axios";
+
 const API_BASE_URL = "http://localhost:5000/api";
 
 export const fetchTemplesByReligion = async (religion) => {
@@ -18,6 +21,16 @@ export async function fetchTempleById(id) {
       console.error("ERROR", error);
       return null;
     }
-  }
+  };
   
+
+  export const fetchNearbyPlaces = async (id) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/temples/${id}/nearby_places`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching nearby places:", error);
+      throw error;
+    }
+  };
   

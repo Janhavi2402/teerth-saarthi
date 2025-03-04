@@ -27,19 +27,12 @@ export default function Recommend() {
     { image: buddhism, title: "Buddhism" },
   ];
 
+
+  
   return (
     <Section>
       <div className="title">
         <h2>Select Religion</h2>
-      </div>
-      <div className="packages">
-        <ul>
-          {religions.map((item, index) => (
-            <li key={index} onClick={() => navigate(`/search?religion=${item.title}`)}>
-              {item.title}
-            </li>
-          ))}
-        </ul>
       </div>
       <div className="destinations">
         <Swiper spaceBetween={10} slidesPerView={3} pagination={{ clickable: true }} navigation={true} modules={[Pagination, Navigation]}>
@@ -63,33 +56,6 @@ const Section = styled.section`
 
   .title {
     margin-bottom: 1rem;
-  }
-
-  .packages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .packages ul {
-    display: flex;
-    gap: 15px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .packages li {
-    padding: 10px 20px;
-    background-color: #8338ec;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .packages li:hover {
-    background-color: #5a27a6;
   }
 
   .destinations {
