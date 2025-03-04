@@ -21,12 +21,17 @@ const TransportDetailsWrapper = () => {
   return <TransportDetails templeId={templeId} />;
 };
 
-function Layout() {
+function App() {
   const location = useLocation();
-  const showNavbar = location.pathname === "/" || location.pathname.startsWith("/place"); // Show navbar on home & place pages
+  
+  // Only show Navbar on the home page and exclude it from place pages
+  const showNavbar = location.pathname === "/" || 
+                    (!location.pathname.startsWith("/place/") && 
+                     !location.pathname.startsWith("/transport/") &&
+                     !location.pathname.startsWith("/stay/") &&
+                     !location.pathname.startsWith("/nearby-attractions/"));
 
   useEffect(() => {
-    // Scroll Reveal Animation
     const sr = scrollreveal({
       origin: "top",
       distance: "80px",
@@ -63,17 +68,9 @@ function Layout() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/transport/:templeId" element={<TransportDetailsWrapper />} />
         <Route path="/stay/:id" element={<WhereToStayPage />} />
-        <Route path="/nearby-attractions/:id" element={<NearbyAttractionsPage/>} />
-
+        <Route path="/nearby-attractions/:id" element={<NearbyAttractionsPage />} />
       </Routes>
     </>
   );
 }
-
-export default function App() {
-  return (
-    <Router>
-      <Layout />
-    </Router>
-  );
-}
+export default App;

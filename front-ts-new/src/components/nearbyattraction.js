@@ -12,6 +12,7 @@ export default function NearbyAttractionsPage() {
   useEffect(() => {
     fetchNearbyPlaces(id)
       .then((data) => {
+        console.log("API Response:", data); // Debugging
         setPlaces(data);
         setLoading(false);
       })
@@ -21,100 +22,38 @@ export default function NearbyAttractionsPage() {
       });
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="text-center text-gray-600">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <>
-      <style>{`
-        .nearby-attractions-container {
-          max-width: 1200px;
-          margin: auto;
-          padding: 20px;
-          text-align: center;
-        }
-
-        h1 {
-          font-size: 2rem;
-          color: #333;
-          margin-bottom: 20px;
-        }
-
-        .places-list {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-
-        .place-card {
-          width: 300px;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-          background: #fff;
-          transition: transform 0.3s ease-in-out;
-        }
-
-        .place-card:hover {
-          transform: translateY(-5px);
-        }
-
-        .place-image {
-          width: 100%;
-          height: 180px;
-          object-fit: cover;
-        }
-
-        .place-info {
-          padding: 15px;
-          text-align: left;
-        }
-
-        .place-info h2 {
-          font-size: 1.5rem;
-          margin-bottom: 10px;
-          color: #444;
-        }
-
-        .place-info p {
-          font-size: 1rem;
-          color: #666;
-          margin: 5px 0;
-        }
-
-        .icon {
-          color: #e44d26;
-          margin-right: 5px;
-          font-size: 1.2rem;
-        }
-      `}</style>
-
-      <div className="nearby-attractions-container">
-        <h1>Nearby Attractions</h1>
-        <div className="places-list">
-          {places.length > 0 ? (
-            places.map((place) => (
-              <div key={place._id} className="place-card">
-                <img
-                  src={place.image || "default-image.jpg"}
-                  alt={place.name}
-                  className="place-image"
-                />
-                <div className="place-info">
-                  <h2>{place.name}</h2>
-                  <p>{place.description}</p>
-                  <p>
-                    <FaMapMarkerAlt className="icon" /> Location: {place.location}
-                  </p>
-                </div>
+    <div className="max-w-5xl mx-auto p-6 text-center">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">Nearby Attractions</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {places.length > 0 ? (
+          places.map((place, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105"
+            >
+              <div className="h-40 flex items-center justify-center bg-gray-200 rounded-lg">
+                <span className="text-gray-500">No Image Available</span>
               </div>
-            ))
-          ) : (
-            <p>No nearby attractions found.</p>
-          )}
-        </div>
+              <div className="text-left mt-4">
+                <h2 className="text-xl font-semibold text-gray-700">{place.name || "Unnamed Place"}</h2>
+                <p className="text-gray-600 mt-2">{place.description || "No description available."}</p>
+                <p className="text-gray-500 mt-2 flex items-center">
+                  <FaMapMarkerAlt className="text-red-500 mr-2" /> {place.location || "Unknown"}
+                </p>
+                <p className="text-gray-500 mt-2">
+                  <strong>Distance:</strong> {place.distance_km ? `${place.distance_km} km` : "Unknown"}
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-600">No nearby attractions found.</p>
+        )}
       </div>
-    </>
+    </div>
   );
 }

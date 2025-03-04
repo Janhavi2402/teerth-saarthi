@@ -26,7 +26,7 @@ export async function fetchTempleById(id) {
 
   export const fetchNearbyPlaces = async (id) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/temples/${id}/nearby_places`);
+      const response = await axios.get(`${API_BASE_URL}/temples/${id}/nearby-places`);
       return response.data;
     } catch (error) {
       console.error("Error fetching nearby places:", error);
