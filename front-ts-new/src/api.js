@@ -6,6 +6,7 @@ export const fetchTemplesByReligion = async (religion) => {
 };
 
 
+
 export async function fetchTempleById(id) {
     try {
       const response = await fetch(`http://localhost:5000/api/temples/${id}`);

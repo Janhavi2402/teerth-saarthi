@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams } from "react-router-dom";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
@@ -12,10 +12,18 @@ import scrollreveal from "scrollreveal";
 import PlacePage from "./components/PlacePage";
 import Login from "./components/authentication/login";
 import Signup from "./components/authentication/signup";
+import TransportDetails from "./components/transportdetails";
+import WhereToStayPage from "./components/wheretostay";
+import NearbyAttractionsPage from "./components/nearbyattraction";
+// Extract templeId from URL and pass it as a prop
+const TransportDetailsWrapper = () => {
+  const { templeId } = useParams();
+  return <TransportDetails templeId={templeId} />;
+};
 
 function Layout() {
   const location = useLocation();
-  const showNavbar = location.pathname === "/"; // Only show navbar on the home page
+  const showNavbar = location.pathname === "/" || location.pathname.startsWith("/place"); // Show navbar on home & place pages
 
   useEffect(() => {
     // Scroll Reveal Animation
@@ -53,6 +61,10 @@ function Layout() {
         <Route path="/place/:id" element={<PlacePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/transport/:templeId" element={<TransportDetailsWrapper />} />
+        <Route path="/stay/:id" element={<WhereToStayPage />} />
+        <Route path="/nearby-attractions/:id" element={<NearbyAttractionsPage/>} />
+
       </Routes>
     </>
   );

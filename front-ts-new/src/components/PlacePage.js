@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { fetchTempleById } from "../api";
 import {
@@ -15,6 +16,19 @@ import goldenImage from "../assets/golden.jpg";
 
 export default function PlacePage() {
   const { id } = useParams();
+  const navigate = useNavigate(); // 🚀 React Router Hook
+
+  const handleNavigate = () => {
+    navigate(`/transport/${id}`); // Navigate with templeId
+  };
+  const handleNavigateToStay = () => {
+    navigate(`/stay/${id}`);
+  };
+  const handleNavigateToAttractions = () => {
+    navigate(`/nearby-attractions/${id}`);
+  };
+  
+  
   const [temple, setTemple] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -71,21 +85,22 @@ export default function PlacePage() {
         <div className="travel-overlay">
           <h2 className="travel-title">Plan Your Pilgrimage</h2>
           <div className="card-container">
-            <div className="card">
-              <FaMapMarkerAlt className="icon" />
-              <h3>How to Reach</h3>
-              <p>Find the best routes to reach {temple?.name} via air, rail, and road.</p>
-            </div>
-            <div className="card">
-              <FaHotel className="icon" />
-              <h3>Where to Stay</h3>
-              <p>Explore nearby accommodations for a comfortable stay.</p>
-            </div>
-            <div className="card">
-              <FaLandmark className="icon" />
-              <h3>Nearby Attractions</h3>
-              <p>Discover other significant places around {temple?.name}.</p>
-            </div>
+          <div className="card" onClick={handleNavigate} style={{ cursor: "pointer" }}>
+            <FaMapMarkerAlt className="icon" />
+            <h3>How to Reach</h3>
+            <p>Find the best routes to reach {temple?.name} via air, rail, and road.</p>
+          </div>
+          <div className="card" onClick={handleNavigateToStay} style={{ cursor: "pointer" }}>
+  <FaHotel className="icon" />
+  <h3>Where to Stay</h3>
+  <p>Explore nearby accommodations for a comfortable stay.</p>
+     </div>
+
+     <div className="card" onClick={handleNavigateToAttractions} style={{ cursor: "pointer" }}>
+  <FaLandmark className="icon" />
+  <h3>Nearby Attractions</h3>
+  <p>Discover other significant places around {temple?.name}.</p>
+</div>
           </div>
         </div>
       </div>
