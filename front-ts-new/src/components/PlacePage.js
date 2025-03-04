@@ -90,30 +90,35 @@ export default function PlacePage() {
         </div>
       </div>
 
-    {/* Timing Section */}
+{/* Timing Section */}
 <div className="place-section timing-section" id="timings">
   <h2>Temple Timings</h2>
   {temple?.timings && Object.keys(temple.timings).length > 0 ? (
     <div className="timing-cards">
-      {Object.entries(temple.timings).map(([day, hours]) => (
-        <div className="timing-card" key={day}>
-          <FaClock className="icon" />
-          <strong>{day}</strong>
-          <p>{typeof hours === "string" ? hours : ""}</p>
-          {typeof hours === "object" && (
-            <ul>
-              {Object.entries(hours).map(([event, timing]) => (
-                <li key={event}><strong>{event}</strong>: {timing}</li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+      {Object.entries(temple.timings).map(([day, hours]) =>
+        typeof hours === "string" ? (
+          <div className="timing-card" key={day}>
+            <FaClock className="icon" />
+            <strong>{day}</strong>
+            <p>{hours}</p>
+          </div>
+        ) : (
+          // If timings are an object (like Aarti Timings), show only inner content
+          Object.entries(hours).map(([event, timing]) => (
+            <div className="timing-card" key={event}>
+              <FaClock className="icon" />
+              <strong>{event}</strong>
+              <p>{timing}</p>
+            </div>
+          ))
+        )
+      )}
     </div>
   ) : (
     <p>No timings available.</p>
   )}
 </div>
+
 
 
 {/* Contact Section */}
