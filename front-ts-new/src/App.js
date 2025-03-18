@@ -15,6 +15,7 @@ import Signup from "./components/authentication/signup";
 import TransportDetails from "./components/transportdetails";
 import WhereToStayPage from "./components/wheretostay";
 import NearbyAttractionsPage from "./components/nearbyattraction";
+import ProfilePage from "./components/profile";
 
 const TransportDetailsWrapper = () => {
   const { templeId } = useParams();
@@ -68,6 +69,8 @@ function App() {
         <Route path="/transport/:templeId" element={<TransportDetailsWrapper />} />
         <Route path="/stay/:id" element={<WhereToStayPage />} />
         <Route path="/nearby-attractions/:id" element={<NearbyAttractionsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+
       </Routes>
     </>
   );

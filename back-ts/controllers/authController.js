@@ -62,4 +62,31 @@ const logoutUser = (req, res) => {
   res.json({ message: "Logged out successfully" });
 };
 
-module.exports = { registerUser, loginUser, logoutUser };
+const getUserProfile = async (req, res) => {
+  try {
+    if (!req.cookies) {
+      return res.status(401).json({ message: "No cookies found" });
+    }
+
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+
+    console.log("Token found:", token);
+
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized: No token" });
+    }
+
+    const decoded = jwt.verify(token, secretKey);
+    const user = await User.findOne({ email: decoded.email }).select("-password"); 
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json(user);
+  } catch (error) {
+    console.error("Profile Fetch Error:", error);
+    res.status(500).json({ message: "Error fetching profile", error: error.message });
+  }
+};
+
+
+module.exports = { registerUser, loginUser, logoutUser,getUserProfile };
