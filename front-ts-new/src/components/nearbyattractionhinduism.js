@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // useParams to get the religion and temple ID
 
-export default function NearbyAttractionsPage() {
+export default function NearbyAttractionsHinduismPage() {
   const { id, religion } = useParams(); // Get both the religion and temple ID from the URL
   const [attractions, setAttractions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,7 @@ export default function NearbyAttractionsPage() {
         setLoading(true);
         // Fetch temple details based on ID
         const response = await fetch(
-          `http://localhost:5000/api/buddhism/${id}`
+          `http://localhost:5000/api/hinduism/${id}`
         );
         
         // Check if response is successful

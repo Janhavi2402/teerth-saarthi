@@ -1,42 +1,56 @@
-require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+require("dotenv").config();
 const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const templeRoutes = require("./routes/templeRoutes");
 const stayRoutes = require("./routes/stayRoutes");
 const howToReachRoutes = require("./routes/howToReachRoutes");
-const imageRoutes = require("./routes/imageRoutes"); // Added image routes
+const imageRoutes = require("./routes/imageRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
-const cookieParser = require("cookie-parser");
-
+const bRoute = require("./routes/b_route");
+const cRoute = require("./routes/c_route");
+const iRoute = require("./routes/i_route");
+const jRoute = require("./routes/j_route");
+const hRoute = require("./routes/h_route");
+const sRoute = require("./routes/s_route");
 
 // Connect to MongoDB
 connectDB();
 
 const app = express();
 
-
-// Middleware
+// Allow all origins (for development purposes, remove or modify for production)
 app.use(cors({
-  origin: "http://localhost:3000", // Allow requests from frontend
-  credentials: true // Allow cookies and authentication headers
+  origin: "*", // Allow all origins
+  credentials: true, // Allow cookies/credentials to be sent with requests
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'],
 }));
+
 app.use(cookieParser());
 
-app.use(express.json({ limit: "20mb" })); // Support for large Base64 images
-
+// Allow handling of large JSON and URL-encoded payloads
+app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ limit: "20mb", extended: true }));
 
-// Routes
+// Define your API routes
 app.use("/auth", authRoutes);
 app.use("/api/temples", templeRoutes);
 app.use("/api/stays", stayRoutes);
 app.use("/api/how-to-reach", howToReachRoutes);
-app.use("/api/images", imageRoutes); // Image route added
+app.use("/api/images", imageRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use("/api", bRoute);
+app.use("/api", cRoute);
+app.use("/api", iRoute);
+app.use("/api", jRoute);
+app.use("/api", hRoute);
+app.use("/api", sRoute);
+
 // Default route
 app.get("/", (req, res) => {
   res.send("Backend is working!");

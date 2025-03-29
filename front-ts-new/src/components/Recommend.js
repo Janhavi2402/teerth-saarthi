@@ -27,18 +27,29 @@ export default function Recommend() {
     { image: buddhism, title: "Buddhism" },
   ];
 
+  const handleClick = (religion) => {
+    // Navigate to /search/{religion} path
+    navigate(`/search/${religion}`);
+  };
 
-  
   return (
-    <Section><br>
-    </br>
-    <br>
-    </br>
+    <Section>
+      <br />
+      <br />
       <div className="destinations">
-        <Swiper spaceBetween={10} slidesPerView={3} pagination={{ clickable: true }} navigation={true} modules={[Pagination, Navigation]}>
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={3}
+          pagination={{ clickable: true }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+        >
           {religions.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="destination" onClick={() => navigate(`/search?religion=${item.title}`)}>
+              <div
+                className="destination"
+                onClick={() => handleClick(item.title)}
+              >
                 <img src={item.image} alt={item.title} />
                 <h3>{item.title}</h3>
               </div>
@@ -53,10 +64,6 @@ export default function Recommend() {
 const Section = styled.section`
   padding: 2rem 0;
   text-align: center;
-
-  .title {
-    margin-bottom: 1rem;
-  }
 
   .destinations {
     padding: 0 3rem;

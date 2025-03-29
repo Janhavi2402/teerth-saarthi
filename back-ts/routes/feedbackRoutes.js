@@ -4,10 +4,10 @@ const router = express.Router();
 const Feedback = require("../models/feedbackModel");
 const User = require("../models/user");
 
-// ✅ Check if ObjectId is valid
+
 const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 
-// ✅ Submit Feedback using `userId` (POST /api/feedback/:userId)
+//  Submit Feedback using `userId` (POST /api/feedback/:userId)
 router.post("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -38,12 +38,12 @@ router.post("/:userId", async (req, res) => {
 });
 
 
-// ✅ Get All Feedback for a Particular User (GET /api/feedback/:userId)
+// Get All Feedback for a Particular User (GET /api/feedback/:userId)
 router.get("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
 
-    // Validate MongoDB ObjectId
+ 
     if (!isValidObjectId(userId)) {
       return res.status(400).json({ message: "Invalid userId format" });
     }
