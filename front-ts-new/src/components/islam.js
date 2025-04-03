@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import './Islam.css'; // Add the CSS file for styling
-
+import './search.css';
 export default function Islam() {
   const [temples, setTemples] = useState([]); // Stores temples for both search and the full list
   const [searchQuery, setSearchQuery] = useState(''); // Stores the current search query

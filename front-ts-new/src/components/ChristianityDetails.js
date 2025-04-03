@@ -14,7 +14,7 @@ export default function ChristianityDetails() {
 
   // Fetch temple details and images based on ID
   useEffect(() => {
-    async function fetchTempleDetails() {
+    async function fetchChristianityDetails() {
       try {
         setLoading(true);
         const templeResponse = await fetch(`http://localhost:5000/api/Christianity/${id}`);
@@ -42,7 +42,7 @@ export default function ChristianityDetails() {
       }
     }
 
-    fetchTempleDetails();
+    fetchChristianityDetails();
   }, [id]); // Re-run effect when `id` changes
 
   const getImageSrc = (index) => {
@@ -65,54 +65,69 @@ export default function ChristianityDetails() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="temple-details">
+    <div className="temple-details-c">
       <h1>{temple?.name}</h1>
-      <p className="temple-address">
+      <p className="temple-address-c">
         <FaMapMarkerAlt /> {temple?.address}, {temple?.state}, {temple?.country}
       </p>
-      <p className="temple-description">{temple?.description}</p>
-      <p className="patron-saint">Patron Saint: {temple?.patron_saint}</p>
-      <p className="established-year">Established in: {temple?.established_year}</p>
-      <p className="architecture-style">Architecture Style: {temple?.architecture_style}</p>
+      <p className="temple-description-c">{temple?.description}</p>
+      <p className="patron-saint-c">Patron Saint: {temple?.patron_saint}</p>
+      <p className="established-year-c">Established in: {temple?.established_year}</p>
+      <p className="architecture-style-c">Architecture Style: {temple?.architecture_style}</p>
       
       {/* Plan Your Pilgrimage Section */}
-      <div className="travel-overlay">
-        <h2 className="travel-title">Plan Your Pilgrimage</h2>
-        <div className="card-container">
-          <div className="card" onClick={() => navigate(`/transport/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaMapMarkerAlt className="icon" />
+      <div className="travel-overlay-c">
+        <h2 className="travel-title-c">Plan Your Pilgrimage</h2>
+        <div className="card-container-c">
+          <div className="card-c" onClick={() => navigate(`/transport/${id}`)} style={{ cursor: 'pointer' }}>
+            <FaMapMarkerAlt className="icon-c" />
             <h3>How to Reach</h3>
             <p>Find the best routes to reach {temple?.name} via air, rail, and road.</p>
+            {images.length > 0 && (
+              <img src={getImageSrc(0)} alt="How to Reach" className="section-image-c" />
+            )}
           </div>
-          <div className="card" onClick={() => navigate(`/stay/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaHotel className="icon" />
+          <div className="card-c" onClick={() => navigate(`/stay/${id}`)} style={{ cursor: 'pointer' }}>
+            <FaHotel className="icon-c" />
             <h3>Where to Stay</h3>
             <p>Explore nearby accommodations for a comfortable stay.</p>
+            {images.length > 1 && (
+              <img src={getImageSrc(1)} alt="Where to Stay" className="section-image-c" />
+            )}
           </div>
-          <div className="card" onClick={() => navigate(`/nearby-attractions-christian/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaLandmark className="icon" />
+          <div className="card-c" onClick={() => navigate(`/nearby-attractions-christian/${id}`)} style={{ cursor: 'pointer' }}>
+            <FaLandmark className="icon-c" />
             <h3>Nearby Attractions</h3>
             <p>Discover other significant places around {temple?.name}.</p>
+            {images.length > 2 && (
+              <img src={getImageSrc(2)} alt="Nearby Attractions" className="section-image-c" />
+            )}
           </div>
         </div>
       </div>
 
       <h2>Temple Timings</h2>
       {temple?.timings && Object.keys(temple.timings).length > 0 ? (
-        <div className="timing-cards">
-          {Object.entries(temple.timings).map(([day, hours]) =>
+        <div className="timing-cards-c">
+          {Object.entries(temple.timings).map(([day, hours], index) =>
             typeof hours === 'string' ? (
-              <div className="timing-card" key={day}>
-                <FaClock className="icon" />
+              <div className="timing-card-c" key={index}>
+                <FaClock className="icon-c" />
                 <strong>{day}</strong>
                 <p>{hours}</p>
+                {images.length > 3 && (
+                  <img src={getImageSrc(3)} alt={`Timing Image ${index}`} className="section-image-c" />
+                )}
               </div>
             ) : (
-              Object.entries(hours).map(([event, timing]) => (
-                <div className="timing-card" key={event}>
-                  <FaClock className="icon" />
+              Object.entries(hours).map(([event, timing], eventIndex) => (
+                <div className="timing-card-c" key={eventIndex}>
+                  <FaClock className="icon-c" />
                   <strong>{event}</strong>
                   <p>{timing}</p>
+                  {images.length > 4 && (
+                    <img src={getImageSrc(4)} alt={`Event Image ${eventIndex}`} className="section-image-c" />
+                  )}
                 </div>
               ))
             )
@@ -123,12 +138,17 @@ export default function ChristianityDetails() {
       )}
 
       {/* Spiritual Ceremonies Section */}
-      <div className="spiritual-ceremonies">
+      <div className="spiritual-ceremonies-c">
         <h2>Spiritual Ceremonies</h2>
         {temple?.spiritual_ceremonies?.length > 0 ? (
           <ul>
             {temple?.spiritual_ceremonies.map((ceremony, index) => (
-              <li key={index}>{ceremony}</li>
+              <li key={index}>
+                {ceremony}
+                {images.length > 5 && (
+                  <img src={getImageSrc(5)} alt={`Ceremony Image ${index}`} className="section-image-c" />
+                )}
+              </li>
             ))}
           </ul>
         ) : (
@@ -137,12 +157,17 @@ export default function ChristianityDetails() {
       </div>
 
       {/* Interesting Facts Section */}
-      <div className="interesting-facts">
+      <div className="interesting-facts-c">
         <h2>Interesting Facts</h2>
         {temple?.interesting_facts?.length > 0 ? (
           <ul>
             {temple?.interesting_facts.map((fact, index) => (
-              <li key={index}>{fact}</li>
+              <li key={index}>
+                {fact}
+                {images.length > 6 && (
+                  <img src={getImageSrc(6)} alt={`Fact Image ${index}`} className="section-image-c" />
+                )}
+              </li>
             ))}
           </ul>
         ) : (
@@ -151,13 +176,16 @@ export default function ChristianityDetails() {
       </div>
 
       {/* Art & Architecture Section */}
-      <div className="art-architecture">
+      <div className="art-architecture-c">
         <h2>Art & Architecture</h2>
         <p>{temple?.art_architecture}</p>
+        {images.length > 7 && (
+          <img src={getImageSrc(7)} alt="Art & Architecture" className="section-image-c" />
+        )}
       </div>
 
       {/* Visiting Information Section */}
-      <div className="visiting-info">
+      <div className="visiting-info-c">
         <h2>Visiting Information</h2>
         {visitingInfo ? (
           <div>
@@ -165,6 +193,9 @@ export default function ChristianityDetails() {
             <p><strong>Visiting Hours:</strong> {visitingInfo.visiting_hours}</p>
             <p><strong>Entry Fee:</strong> {visitingInfo.entry_fee}</p>
             <p><strong>Special Festival:</strong> {visitingInfo.special_festival}</p>
+            {images.length > 8 && (
+              <img src={getImageSrc(8)} alt="Visiting Information" className="section-image-c" />
+            )}
           </div>
         ) : (
           <p>No visiting information available.</p>
@@ -172,21 +203,14 @@ export default function ChristianityDetails() {
       </div>
 
       {/* Contact Information Section */}
-      <div className="contact-info">
+      <div className="contact-info-c">
         <h2>Contact Information</h2>
         <p>Phone: {temple?.contact?.phone_numbers?.join(', ')}</p>
         <p>Email: <a href={`mailto:${temple?.contact?.email}`}>{temple?.contact?.email}</a></p>
         <p>Official Website: <a href={temple?.contact?.official_website} target="_blank" rel="noopener noreferrer">{temple?.contact?.official_website}</a></p>
-      </div>
-
-      {/* Image Section */}
-      <div className="temple-images">
-        <h2>Images</h2>
-        <div className="image-gallery">
-          {images.map((image, index) => (
-            <img key={index} src={getImageSrc(index)} alt={`Temple Image ${index + 1}`} />
-          ))}
-        </div>
+        {images.length > 9 && (
+          <img src={getImageSrc(9)} alt="Contact Information" className="section-image-c" />
+        )}
       </div>
     </div>
   );

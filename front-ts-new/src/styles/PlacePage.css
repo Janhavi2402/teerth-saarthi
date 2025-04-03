@@ -2,7 +2,7 @@
 body {
     background-color: #f7f5f4;
     margin: 0;
-    padding: 0;
+    padding: -1;
     font-family: Arial, sans-serif;
 }
 
@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
     max-width: 2000px;
     margin: auto;
-    padding: 20px;
+    padding: 2px;
 }
 
 /* Full-page image with overlay */

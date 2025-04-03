@@ -19,7 +19,7 @@ import Islam from './components/islam';
 import Jainism from './components/jainism';
 import Buddhism from './components/buddhism';
 import Sikhism from './components/sikhism';
-import TempleDetails from './components/TempleDetails';
+import BuddhismDetails from './components/BuddhismDetails';
 import ChristianityDetails from './components/ChristianityDetails';
 import IslamDetails from './components/IslamDetails';
 import JainismDetails from './components/JainismDetails';
@@ -98,7 +98,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/temple/:id" element={<TempleDetails />} />
+        <Route path="/temple/:id" element={<BuddhismDetails />} />
         <Route path="/christianity/:id" element={<ChristianityDetails />} />
         <Route path="/islam/:id" element={<IslamDetails />} />
         <Route path="/jainism/:id" element={<JainismDetails />} />

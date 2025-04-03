@@ -1,0 +1,112 @@
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+   
+    text-align: center;
+    margin: 0 auto; /* Centers the container */
+    display: block; /* Ensure it's a block element that takes full width */
+  }
+  
+  /* Title */
+  .title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  /* Search Bar Container */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+  
+  /* Search Input */
+  .search-input {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 400px;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Focus state of search input */
+  .search-input:focus {
+    outline: none;
+    border-color: #7b61ff;
+  }
+  
+  /* Search Button */
+  .search-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #7b61ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for search button */
+  .search-button:hover {
+    background-color: #5a43d1;
+  }
+  
+  /* List of Temples */
+  .temples-list {
+    margin-top: 2rem;
+  }
+  
+  /* Temple Items List */
+  .temple-items {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Each Temple Item */
+  .temple-item {
+    background-color: #fafafa;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Hover effect on each temple item */
+  .temple-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Temple Link */
+  .temple-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover effect for temple link */
+  .temple-link:hover {
+    color: #7b61ff;
+  }
+  
+  /* No Results Message */
+  .temple-list p {
+    color: #888;
+    font-size: 1rem;
+    margin-top: 1rem;
+    font-style: italic;
+  }
+  

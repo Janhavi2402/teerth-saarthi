@@ -62,14 +62,15 @@ export default function Recommend() {
 }
 
 const Section = styled.section`
-  padding: 2rem 0;
+  padding: 2rem 2rem;
   text-align: center;
 
   .destinations {
-    padding: 0 3rem;
+    padding: 0 0rem;
 
     .destination {
-      margin-left: 75px;
+      margin-left: 0px;
+      margin-right:0px;
       position: relative;
       background-color: rgba(120, 157, 181, 0.57);
       width: 300px;

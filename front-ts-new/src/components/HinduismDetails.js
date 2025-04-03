@@ -66,52 +66,57 @@ export default function HinduismDetails() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="place-details">
+    <div className="place-details-h">
       <h1>{place?.name}</h1>
-      <p className="place-address">
+      <p className="place-address-h">
         <FaMapMarkerAlt /> {place?.address}, {place?.state}, {place?.religion}
       </p>
-      <p className="place-description">{place?.description}</p>
-      <p className="art-architecture">Art and Architecture: {place?.art_architecture}</p>
+      <p className="place-description-h">{place?.description}</p>
+      <p className="art-architecture-h">Art and Architecture: {place?.art_architecture}</p>
 
       {/* Plan Your Pilgrimage Section */}
-      <div className="travel-overlay">
-        <h2 className="travel-title">Plan Your Pilgrimage</h2>
-        <div className="card-container">
-          <div className="card" onClick={() => navigate(`/transport/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaMapMarkerAlt className="icon" />
+      <div className="travel-overlay-h">
+        <h2 className="travel-title-h">Plan Your Pilgrimage</h2>
+        <div className="card-container-h">
+          <div className="card-h" onClick={() => navigate(`/transport/${id}`)} style={{ cursor: 'pointer' }}>
+            <FaMapMarkerAlt className="icon-h" />
             <h3>How to Reach</h3>
             <p>Find the best routes to reach {place?.name} via air, rail, and road.</p>
+            <img src={getImageSrc(0)} alt="How to Reach" className="section-image-h" />
           </div>
-          <div className="card" onClick={() => navigate(`/stay/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaHotel className="icon" />
+          <div className="card-h" onClick={() => navigate(`/stay/${id}`)} style={{ cursor: 'pointer' }}>
+            <FaHotel className="icon-h" />
             <h3>Where to Stay</h3>
             <p>Explore nearby accommodations for a comfortable stay.</p>
+            <img src={getImageSrc(1)} alt="Where to Stay" className="section-image-h" />
           </div>
-          <div className="card" onClick={() => navigate(`/nearby-attractions-hinduism/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaLandmark className="icon" />
+          <div className="card-h" onClick={() => navigate(`/nearby-attractions-hinduism/${id}`)} style={{ cursor: 'pointer' }}>
+            <FaLandmark className="icon-h" />
             <h3>Nearby Attractions</h3>
             <p>Discover other significant places around {place?.name}.</p>
+            <img src={getImageSrc(2)} alt="Nearby Attractions" className="section-image-h" />
           </div>
         </div>
       </div>
 
       <h2>Temple Timings</h2>
       {place?.timings && Object.keys(place.timings).length > 0 ? (
-        <div className="timing-cards">
+        <div className="timing-cards-h">
           {Object.entries(place.timings).map(([day, hours]) =>
             typeof hours === 'string' ? (
-              <div className="timing-card" key={day}>
-                <FaClock className="icon" />
+              <div className="timing-card-h" key={day}>
+                <FaClock className="icon-h" />
                 <strong>{day}</strong>
                 <p>{hours}</p>
+                <img src={getImageSrc(3)} alt="Temple Timings" className="section-image-h" />
               </div>
             ) : (
               Object.entries(hours).map(([event, timing]) => (
-                <div className="timing-card" key={event}>
-                  <FaClock className="icon" />
+                <div className="timing-card-h" key={event}>
+                  <FaClock className="icon-h" />
                   <strong>{event}</strong>
                   <p>{timing}</p>
+                  <img src={getImageSrc(4)} alt="Event Timings" className="section-image-h" />
                 </div>
               ))
             )
@@ -122,43 +127,45 @@ export default function HinduismDetails() {
       )}
 
       {/* Interesting Facts Section */}
-      <div className="interesting-facts">
+      <div className="interesting-facts-h">
         <h2>Interesting Facts</h2>
         <ul>
           {place?.interesting_facts?.map((fact, index) => (
             <li key={index}>{fact}</li>
           ))}
         </ul>
+        <img src={getImageSrc(5)} alt="Interesting Facts" className="section-image-h" />
       </div>
-{/* Visiting Info Section */}
-<div className="visiting-info">
-  <h2>Visiting Information</h2>
-  {place?.visiting_info ? (
-    <div>
-      <p><strong>Location:</strong> {`Latitude: ${place.visiting_info.location.latitude}, Longitude: ${place.visiting_info.location.longitude}`}</p>
-      <p><strong>Visiting Hours:</strong> {place.visiting_info.visiting_hours}</p>
-    </div>
-  ) : (
-    <p>No visiting information available.</p>
-  )}
-</div>
+
+      {/* Visiting Info Section */}
+      <div className="visiting-info-h">
+        <h2>Visiting Information</h2>
+        {place?.visiting_info ? (
+          <div>
+            <p><strong>Location:</strong> {`Latitude: ${place.visiting_info.location.latitude}, Longitude: ${place.visiting_info.location.longitude}`}</p>
+            <p><strong>Visiting Hours:</strong> {place.visiting_info.visiting_hours}</p>
+            <img src={getImageSrc(6)} alt="Visiting Info" className="section-image-h" />
+          </div>
+        ) : (
+          <p>No visiting information available.</p>
+        )}
+      </div>
 
       {/* Contact Information Section */}
-      <div className="contact-info">
+      <div className="contact-info-h">
         <h2>Contact Information</h2>
         <p>Phone: {place?.contact?.phone_numbers?.join(', ')}</p>
         <p>Email: <a href={`mailto:${place?.contact?.email}`}>{place?.contact?.email}</a></p>
         <p>Official Website: <a href={place?.contact?.official_website} target="_blank" rel="noopener noreferrer">{place?.contact?.official_website}</a></p>
+        <img src={getImageSrc(7)} alt="Contact Info" className="section-image-h" />
       </div>
 
-      
-
       {/* Image Section */}
-      <div className="place-images">
+      <div className="place-images-h">
         <h2>Images</h2>
-        <div className="image-gallery">
+        <div className="image-gallery-h">
           {images.map((image, index) => (
-            <img key={index} src={getImageSrc(index)} alt={`Place Image ${index + 1}`} />
+            <img key={index} src={getImageSrc(index)} alt={`Place Image ${index + 1}`} className="section-image-h" />
           ))}
         </div>
       </div>

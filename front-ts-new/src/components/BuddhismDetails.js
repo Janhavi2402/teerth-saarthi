@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'; // useParams to get t
 import './Buddhism.css'; // Add the CSS file for styling
 import { FaMapMarkerAlt, FaHotel, FaLandmark, FaClock } from 'react-icons/fa'; // Import the icons
 
-export default function TempleDetails() {
+export default function BuddhismDetails() {
   const { id } = useParams(); // Get temple ID from URL
   const [temple, setTemple] = useState(null);
   const [images, setImages] = useState([]); // State to hold images for the temple
@@ -13,7 +13,7 @@ export default function TempleDetails() {
 
   // Fetch temple details and images based on ID
   useEffect(() => {
-    async function fetchTempleDetails() {
+    async function fetchBuddhismDetails() {
       try {
         setLoading(true);
         const templeResponse = await fetch(`http://localhost:5000/api/buddhism/${id}`);
@@ -40,7 +40,7 @@ export default function TempleDetails() {
       }
     }
 
-    fetchTempleDetails();
+    fetchBuddhismDetails();
   }, [id]); // Re-run effect when `id` changes
 
   const getImageSrc = (index) => {
@@ -63,104 +63,105 @@ export default function TempleDetails() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="temple-details-fullscreen">
-      {/* Temple Images */}
-      <div className="place-container">
-        {/* Full-page Image with Overlay */}
-        <div className="place-image">
-          {images.length > 0 ? (
-            <img src={getImageSrc(0)} alt="Temple View" />
-          ) : (
-            <p>No Image Available</p>
-          )}
-        </div>
-
-        <div className="temple-images">
-          {images.length > 0 && images.map((image, index) => (
-            <img key={index} src={getImageSrc(index)} alt={`Temple Image ${index + 1}`} className="temple-image" />
-          ))}
+    <div className="temple-details-fullscreen-b">
+      {/* Temple Image Section 1 */}
+      <div className="section-b">
+        <div className="image-container-b">
+          <img src={getImageSrc(0)} alt="Temple View" className="image-b" />
+          <div className="overlay-b">
+            <h2>{temple.name}</h2>
+            <p>{temple.address}</p>
+          </div>
         </div>
       </div>
 
-      {/* Temple Name and Location */}
-      <h2>{temple.name}</h2>
-      <p><strong>Address:</strong> {temple.address}</p>
-      <p><strong>Location:</strong> {temple.state}, {temple.religion}</p>
-      {images.length > 1 && <img src={getImageSrc(1)} alt="Temple About" className="about-image" />}
-
-      {/* Temple Description */}
-      <section>
-        <h3>Description</h3>
-        <p>{temple.description}</p>
-        {images.length > 1 && <img src={getImageSrc(1)} alt="Temple About" className="about-image" />}
+      {/* Temple Description Section 2 */}
+      <section className="section-b">
+        <div className="image-container-b">
+          <img src={getImageSrc(1)} alt="Temple Description" className="image-b" />
+          <div className="overlay-b">
+            <h3>Description</h3>
+            <p>{temple.description}</p>
+          </div>
+        </div>
       </section>
 
-      {/* Temple Timings */}
-      <h2>Temple Timings</h2>
-      {temple?.timings && Object.keys(temple.timings).length > 0 ? (
-        <div className="timing-cards">
-          {Object.entries(temple.timings).map(([day, hours]) =>
-            typeof hours === 'string' ? (
-              <div className="timing-card" key={day}>
-                <FaClock className="icon" />
-                <strong>{day}</strong>
-                <p>{hours}</p>
+      {/* Temple Timings Section 3 */}
+      <section className="section-b">
+        <div className="image-container-b">
+          <img src={getImageSrc(2)} alt="Temple Timings" className="image-b" />
+          <div className="overlay-b">
+            <h3>Temple Timings</h3>
+            {temple?.timings && Object.keys(temple.timings).length > 0 ? (
+              <div className="timing-cards-b">
+                {Object.entries(temple.timings).map(([day, hours]) =>
+                  typeof hours === 'string' ? (
+                    <div className="timing-card-b" key={day}>
+                      <FaClock className="icon" />
+                      <strong>{day}</strong>
+                      <p>{hours}</p>
+                    </div>
+                  ) : (
+                    Object.entries(hours).map(([event, timing]) => (
+                      <div className="timing-card-b" key={event}>
+                        <FaClock className="icon-b" />
+                        <strong>{event}</strong>
+                        <p>{timing}</p>
+                      </div>
+                    ))
+                  )
+                )}
               </div>
             ) : (
-              Object.entries(hours).map(([event, timing]) => (
-                <div className="timing-card" key={event}>
-                  <FaClock className="icon" />
-                  <strong>{event}</strong>
-                  <p>{timing}</p>
-                </div>
-              ))
-            )
-          )}
-        </div>
-      ) : (
-        <p>No timings available.</p>
-      )}
-
-      {/* Plan Your Pilgrimage Section */}
-      <div className="travel-overlay">
-        <h2 className="travel-title">Plan Your Pilgrimage</h2>
-        <div className="card-container">
-          <div className="card" onClick={() => navigate(`/transport/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaMapMarkerAlt className="icon" />
-            <h3>How to Reach</h3>
-            <p>Find the best routes to reach {temple?.name} via air, rail, and road.</p>
-          </div>
-          <div className="card" onClick={() => navigate(`/stay/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaHotel className="icon" />
-            <h3>Where to Stay</h3>
-            <p>Explore nearby accommodations for a comfortable stay.</p>
-          </div>
-          <div className="card" onClick={() => navigate(`/nearby-attractions/${id}`)} style={{ cursor: 'pointer' }}>
-            <FaLandmark className="icon" />
-            <h3>Nearby Attractions</h3>
-            <p>Discover other significant places around {temple?.name}.</p>
+              <p>No timings available.</p>
+            )}
           </div>
         </div>
-      </div>
-
-      {/* Visiting Information */}
-      <section>
-        <h3>Visiting Information</h3>
-        <p><strong>Visiting Hours:</strong> {temple.visiting_info?.visiting_hours}</p>
-        <p><strong>Location Coordinates:</strong> Lat: {temple.visiting_info?.location?.latitude}, Long: {temple.visiting_info?.location?.longitude}</p>
       </section>
 
-      {/* Interesting Facts */}
-      <section>
-        <h3>Interesting Facts</h3>
-        <ul>
-          {temple.interesting_facts?.map((fact, index) => (
-            <li key={index}>{fact}</li>
-          ))}
-        </ul>
+      {/* Plan Your Pilgrimage Section 4 */}
+      <section className="section-b">
+        <div className="image-container-b">
+          <img src={getImageSrc(3)} alt="Pilgrimage Plan" className="image-b" />
+          <div className="overlay-b">
+            <h2>Plan Your Pilgrimage</h2>
+            <div className="card-container-b">
+              <div className="card-b" onClick={() => navigate(`/transport/${id}`)} style={{ cursor: 'pointer' }}>
+                <FaMapMarkerAlt className="icon-b" />
+                <h3>How to Reach</h3>
+                <p>Find the best routes to reach {temple?.name} via air, rail, and road.</p>
+              </div>
+              <div className="card-b" onClick={() => navigate(`/stay/${id}`)} style={{ cursor: 'pointer' }}>
+                <FaHotel className="icon-b" />
+                <h3>Where to Stay</h3>
+                <p>Explore nearby accommodations for a comfortable stay.</p>
+              </div>
+              <div className="card-b" onClick={() => navigate(`/nearby-attractions/${id}`)} style={{ cursor: 'pointer' }}>
+                <FaLandmark className="icon-b" />
+                <h3>Nearby Attractions</h3>
+                <p>Discover other significant places around {temple?.name}.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Buddha Association */}
+      {/* Interesting Facts Section 5 */}
+      <section className="section-b">
+        <div className="image-container-b">
+          <img src={getImageSrc(4)} alt="Interesting Facts" className="image-b" />
+          <div className="overlay-b">
+            <h3>Interesting Facts</h3>
+            <ul>
+              {temple.interesting_facts?.map((fact, index) => (
+                <li key={index}>{fact}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Buddha Association Section */}
       <section>
         <h3>Buddha Association</h3>
         <p>{temple.buddha_association}</p>
