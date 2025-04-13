@@ -52,6 +52,7 @@ export default function Navbar() {
     color: "#0077b6",
     fontSize: "1.2rem",
     transition: "0.1s ease-in-out",
+    cursor: "pointer"
   };
 
   const activeLinkStyle = {
@@ -215,7 +216,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a style={linkStyle} onClick={() => setNavbarState(false)}>
+            <a style={linkStyle} onClick={() => navigate('/wishList')}>
               Wishlist
             </a>
           </li>

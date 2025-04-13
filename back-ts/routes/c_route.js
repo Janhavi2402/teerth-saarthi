@@ -58,14 +58,12 @@ router.get('/Christianity/:id', async (req, res) => {
 
 router.get('/Christianity', async (req, res) => {
   try {
-    console.log('Fetching Christianity temples...');
     const temples = await Christianity.find({ religion: 'Christianity' });
 
     if (temples.length === 0) {
       return res.status(404).json({ message: 'No Christianity temples found' });
     }
 
-    console.log('Temples found:', temples);
     res.json(temples);
   } catch (err) {
     console.error('Error:', err);

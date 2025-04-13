@@ -27,7 +27,6 @@ router.get("/:id", async (req, res) => {
       return res.status(404).json({ error: "Temple not found" });
     }
 
-    console.log(temple); 
     res.json(temple);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error: error.message });
@@ -36,7 +35,6 @@ router.get("/:id", async (req, res) => {
 router.get("/:id/nearby-places", async (req, res) => {
   try {
     const templeId = req.params.id;
-    console.log("Fetching nearby places for temple:", templeId);
 
     if (!mongoose.Types.ObjectId.isValid(templeId)) {
       return res.status(400).json({ error: "Invalid Temple ID format" });

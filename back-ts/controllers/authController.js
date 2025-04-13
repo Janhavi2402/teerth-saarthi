@@ -3,11 +3,10 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.js");
 require("dotenv").config(); 
 
-const secretKey = process.env.JWT_SECRET;
+const secretKey = process.env.JWT_SECRET || "2345";
 
 const registerUser = async (req, res) => {
   try {
-    console.log("Incoming Request:", req.body); 
     const { name, email, password, confirm } = req.body;
     if (!name || !email || !password || !confirm) {
       return res.status(400).json({ message: "All fields are required" });
@@ -31,7 +30,6 @@ const registerUser = async (req, res) => {
     const token = jwt.sign({ email: user.email }, secretKey);
     res.cookie("token", token);
 
-    console.log("User registered successfully");
     res.status(201).json({ message: "User registered successfully", token });
 
   } catch (error) {
@@ -49,7 +47,7 @@ const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: "1h" });
+    const token = jwt.sign({ email: user.email, id: user._id}, secretKey, { expiresIn: "1h" });
     res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
 
     res.json({ message: "Login successful", token });
@@ -70,7 +68,6 @@ const getUserProfile = async (req, res) => {
 
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
-    console.log("Token found:", token);
 
     if (!token) {
       return res.status(401).json({ message: "Unauthorized: No token" });
