@@ -17,6 +17,7 @@ const iRoute = require("./routes/i_route");
 const jRoute = require("./routes/j_route");
 const hRoute = require("./routes/h_route");
 const sRoute = require("./routes/s_route");
+const wishlist=require("./routes/wishlistRoutes")
 
 // Connect to MongoDB
 connectDB();
@@ -50,6 +51,7 @@ app.use("/api", iRoute);
 app.use("/api", jRoute);
 app.use("/api", hRoute);
 app.use("/api", sRoute);
+app.use("/api",wishlist);
 
 // Default route
 app.get("/", (req, res) => {
@@ -59,7 +61,6 @@ app.get("/", (req, res) => {
 // Debug: Check MongoDB collections on startup
 mongoose.connection.once("open", async () => {
   console.log("MongoDB Connected Successfully!");
-  console.log("Collections:", await mongoose.connection.db.listCollections().toArray());
 });
 
 // Start Server

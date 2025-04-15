@@ -35,15 +35,17 @@ import NearbyAttractionsIslamPage from "./components/nearbyattractionislam";
 import NearbyAttractionsJainismPage from "./components/nearbyattractionjainism";
 import NearbyAttractionsHinduismPage from "./components/nearbyattractionhinduism";
 import NearbyAttractionsSikhismPage from "./components/nearbyattractionsikhism";
+import { WishList } from "./components/WishList";
 
 // Test the fetch with credentials on the frontend
-fetch("http://localhost:5000/api/some-endpoint", {
-  method: "GET",
-  credentials: "include",  // Ensure cookies are sent with the request
-})
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.log(error));
+// comment below fetch is not the proper way to fetch by Samadhan
+// fetch("http://localhost:5000/api/some-endpoint", {
+//   method: "GET",
+//   credentials: "include",  // Ensure cookies are sent with the request
+// })
+//   .then(response => response.json())
+//   .then(data => console.log(data))
+//   .catch(error => console.log(error));
 
 const TransportDetailsWrapper = () => {
   const { templeId } = useParams();
@@ -111,7 +113,8 @@ function App() {
         <Route path="/nearby-attractions-islam/:id" element={<NearbyAttractionsIslamPage />} />
         <Route path="/nearby-attractions-jainism/:id" element={<NearbyAttractionsJainismPage />} />
         <Route path="/nearby-attractions-hinduism/:id" element={<NearbyAttractionsHinduismPage />} />
-        <Route path="/nearby-attractions-sikhism/:id" element={<NearbyAttractionsSikhismPage />} />
+        <Route path="/wishlist" element={<WishList />} />
+        
       </Routes>
     </>
   );

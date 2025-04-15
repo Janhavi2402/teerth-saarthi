@@ -6,7 +6,12 @@ export default function Jainism() {
   const [temples, setTemples] = useState([]); // Stores temples for both search and the full list
   const [searchQuery, setSearchQuery] = useState(''); // Stores the current search query
   const [filteredTemples, setFilteredTemples] = useState([]); // Stores the filtered temples based on search
-
+ const [wishlist, setWishlist] = useState([]);
+  const tokenuser=localStorage.getItem("token");
+  const decodedtoken = JSON.parse(atob(tokenuser.split(".")[1]));
+  // console.log("decoded Token: ", decodedtoken)
+  const userId = decodedtoken.id;
+  // console.log("UserId: ",userId);
   // Fetch the list of all temples on initial load
   const fetchTemples = async () => {
     try {
@@ -23,6 +28,29 @@ export default function Jainism() {
   useEffect(() => {
     fetchTemples();
   }, []); // Runs only once on component mount
+ const fetchWishlist = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+      const data = await response.json();
+      
+      if (data.success) {
+        console.log("wishlistdata", data);
+        const places = data.data.places; // Get 'places' from the wishlist object
+        setWishlist(places);
+      } else {
+        setWishlist([]);
+      }
+    } catch (error) {
+      console.error("Error fetching wishlist:", error);
+      setWishlist([]);
+    }
+  };
+  
+  useEffect(() => {
+    fetchTemples();
+    fetchWishlist(); 
+  }, [wishlist]);
+
 
   // Function to handle the search query and filter temples
   const handleSearch = () => {
@@ -41,6 +69,35 @@ export default function Jainism() {
     console.log(`Temple clicked with ID: ${templeId}`);
     // For now, we are relying on the Link for navigation
   };
+  const  handleWishlistToggle=async(temple)=>{
+    try{
+      const body={
+        userId,
+        temple_id: temple._id,
+        name: temple.name,
+        address: temple.address,
+        description: temple.description,
+        state: temple.state
+      };
+      console.log("Sending body:", body);
+      const response=await fetch("http://localhost:5000/api/wishlist",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      })
+      const result = await response.json();
+      console.log(result);
+      if (!response.ok) {
+        console.error("Server error response:", result);
+      } else {
+        setWishlist(prevWishlist => [...prevWishlist, result]);
+      }
+    } catch (error) {
+      console.error("Error updating wishlist", error);
+    }
+  }
 
   return (
     <div className="container">
@@ -66,11 +123,22 @@ export default function Jainism() {
         {filteredTemples.length > 0 ? (
           <ul className="temple-items">
             {filteredTemples.map((temple) => (
-              <li key={temple._id} className="temple-item">
+              <li key={temple._id} className="flex items-center justify-between bg-white shadow-md p-4 mb-4 rounded-lg">
                 {/* Link to the temple details page */}
-                <Link to={`/jainism/${temple._id}`} className="temple-link" onClick={() => handleTempleClick(temple._id)}>
+                <Link to={`/jainism/${temple._id}`}  className="text-lg font-medium text-blue-700 hover:underline"onClick={() => handleTempleClick(temple._id)}>
                   {temple.name}
                 </Link>
+                <button
+          onClick={() => handleWishlistToggle(temple)}
+          className={`text-2xl transition-transform duration-200 hover:scale-125 ${
+            wishlist.some(item => item.temple_id === temple._id)
+              ? 'text-red-500'
+              : 'text-gray-400 hover:text-red-400'
+          }`}
+          title="Add to wishlist"
+        >
+          {wishlist.some(item => item.temple_id === temple._id) ? '❤' : '🤍'}
+        </button>
               </li>
             ))}
           </ul>
