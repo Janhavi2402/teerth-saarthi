@@ -1,25 +1,34 @@
-/* General Styles */
 .place-details-h {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
-
+h2{
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
 h1 {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
 p {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-/* Address and Description Styles */
-.place-address-h,
+.place-address-h{
+  margin-bottom: 15px;
+  color:#645b5b;
+}
 .place-description-h,
 .art-architecture-h {
+  font-weight:normal ;
+  color: black;
   margin-bottom: 15px;
 }
 
@@ -30,14 +39,10 @@ p {
 .place-description-h {
   font-size: 1.3rem;
 }
-
-/* Icon Styling */
 .icon-h {
   margin-right: 8px;
   vertical-align: middle;
 }
-
-/* Section Image Styling */
 .section-image-h {
   margin-top: 15px;
   width: 100%;
@@ -45,8 +50,6 @@ p {
   max-height: 400px;
   object-fit: cover;
 }
-
-/* Plan Your Pilgrimage Section */
 .travel-overlay-h {
   background-color: #f8f8f8;
   padding: 30px;
@@ -55,7 +58,8 @@ p {
 }
 
 .travel-title-h {
-  font-size: 2rem;
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
@@ -88,8 +92,6 @@ p {
 .card-h p {
   font-size: 1.1rem;
 }
-
-/* Timing Section */
 .timing-cards-h {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -112,23 +114,26 @@ p {
 .timing-card-h p {
   font-size: 1.1rem;
 }
-
-/* Interesting Facts Section */
 .interesting-facts-h ul {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
   list-style-type: disc;
   padding-left: 20px;
+  
 }
 
 .interesting-facts-h li {
-  font-size: 1.1rem;
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.2rem;
   margin-bottom: 10px;
+  font-weight:normal ;
+  color: black;
+  margin-bottom: 15px;
 }
-
-/* Visiting Information Section */
 .visiting-info-h {
   margin-top: 30px;
   padding: 20px;
-  background-color: #f8f8f8;
   border-radius: 8px;
 }
 
@@ -140,15 +145,16 @@ p {
 .visiting-info-h strong {
   font-weight: bold;
 }
-
-/* Contact Information Section */
 .contact-info-h {
   margin-top: 30px;
 }
 
-.contact-info-h p {
+.contact-info-h ul {
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
 .contact-info-h a {
@@ -160,19 +166,51 @@ p {
   text-decoration: underline;
 }
 
-/* Image Gallery Section */
+
 .place-images-h {
   margin-top: 30px;
 }
 
 .image-gallery-h {
   display: flex;
-  gap: 15px;
+  gap: 25px;
   flex-wrap: wrap;
 }
 
 .image-gallery-h img {
-  width: 30%;
+  width: 25%;
   height: auto;
   object-fit: cover;
 }
+.weather-container{
+  height:350px;
+}
+.weather-box {
+  /* height:450px; */
+   padding: 20px; 
+  border: 1px solid #ccc;
+  margin-bottom:10px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  max-width: 400px;
+}
+
+.weather-details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.weather-details img {
+  width: 64px;
+  height: 64px;
+}
+.map-weather-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;  
+  margin: 20px auto;
+  max-width: 90%;
+}
+
+

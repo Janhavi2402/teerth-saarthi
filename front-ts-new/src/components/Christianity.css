@@ -5,23 +5,35 @@
   padding: 20px;
   font-family: Arial, sans-serif;
 }
-
+h2{
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
 h1 {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
 p {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
 /* Address and Description Styles */
-.temple-address-c,
+.temple-address-c{
+  margin-bottom: 15px;
+  color:#645b5b;
+
+}
 .temple-description-c,
-.patron-saint-c,
-.established-year-c,
-.architecture-style-c {
+.art-architecture-c ,
+.patron-saint-c ,
+.established-year-c{
+  font-weight:normal ;
+  color: black;
   margin-bottom: 15px;
 }
 
@@ -39,7 +51,7 @@ p {
   vertical-align: middle;
 }
 
-/* Image Styles */
+/* Section Image Styling */
 .section-image-c {
   margin-top: 15px;
   width: 100%;
@@ -57,7 +69,8 @@ p {
 }
 
 .travel-title-c {
-  font-size: 2rem;
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
   margin-bottom: 20px;
 }
 
@@ -91,14 +104,6 @@ p {
   font-size: 1.1rem;
 }
 
-.card-c img {
-  width: 100%;
-  height: auto;
-  margin-top: 15px;
-  max-height: 200px;
-  object-fit: cover;
-}
-
 /* Timing Section */
 .timing-cards-c {
   display: grid;
@@ -123,43 +128,31 @@ p {
   font-size: 1.1rem;
 }
 
-/* Spiritual Ceremonies Section */
-.spiritual-ceremonies-c ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-
-.spiritual-ceremonies-c li {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-}
-
 /* Interesting Facts Section */
-.interesting-facts-c ul {
+.interesting-facts-c ul ,
+.spiritual-ceremonies-c ul {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
   list-style-type: disc;
   padding-left: 20px;
+  
 }
 
-.interesting-facts-c li {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-}
-
-/* Art & Architecture Section */
-.art-architecture-c {
-  margin-top: 30px;
-}
-
-.art-architecture-c p {
+.interesting-facts-c li,
+.spiritual-ceremonies-c li {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-weight:normal ;
+  color: black;
+  margin-bottom: 15px;
 }
 
 /* Visiting Information Section */
 .visiting-info-c {
   margin-top: 30px;
   padding: 20px;
-  background-color: #f8f8f8;
   border-radius: 8px;
 }
 
@@ -177,9 +170,12 @@ p {
   margin-top: 30px;
 }
 
-.contact-info-c p {
+.contact-info-c ul {
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
 .contact-info-c a {
@@ -189,4 +185,21 @@ p {
 
 .contact-info-c a:hover {
   text-decoration: underline;
+}
+
+/* Image Gallery Section */
+.temple-images-c {
+  margin-top: 30px;
+}
+
+.image-gallery-c {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.image-gallery-c img {
+  width: 25%;
+  height: auto;
+  object-fit: cover;
 }

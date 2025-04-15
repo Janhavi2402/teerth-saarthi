@@ -1,236 +1,200 @@
-/* General Layout and Background */
-.temple-details-fullscreen-b {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+/* General Styles */
+.place-details-b {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
+  font-family: Arial, sans-serif;
+}
+h2{
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+h1 {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-/* Section Styles */
-.section-b {
-  position: relative;
-  margin-bottom: 40px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-}
-
-.image-container-b {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.image-b {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
-  transition: transform 0.5s ease;
-}
-
-.image-b:hover {
-  transform: scale(1.05);
-}
-
-/* Overlay with Fancy Text */
-.overlay-b {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-  padding: 30px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.image-container-b:hover .overlay-b {
-  opacity: 1;
-}
-
-.overlay-b h2, .overlay-b h3 {
-  font-size: 2rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+p {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-.overlay-b p {
-  font-size: 1.2rem;
-  font-weight: normal;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
+/* Address and Description Styles */
+.place-address-b {
+  margin-bottom: 15px;
+  color:#645b5b;
+}
+.place-description-b,
+.art-architecture-b {
+  font-weight:normal ;
+  color: black;
+  margin-bottom: 15px;
 }
 
-/* Cards Section for Pilgrimage Info */
-.card-container-b {
-  display: flex;
-  justify-content: space-between;
+.place-address-b {
+  font-style: italic;
+}
+
+.place-description-b {
+  font-size: 1.3rem;
+}
+
+/* Icon Styling */
+.icon-b {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Section Image Styling */
+.section-image-b {
+  margin-top: 15px;
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+/* Plan Your Pilgrimage Section */
+.travel-overlay-b {
+  background-color: #f8f8f8;
+  padding: 30px;
+  border-radius: 8px;
   margin-top: 30px;
 }
 
+.travel-title-b {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.card-container-b {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
 .card-b {
-  width: 30%;
   background-color: #fff;
-  padding: 25px;
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-b:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.icon-b {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #2c3e50;
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
 }
 
 .card-b h3 {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #34495e;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .card-b p {
-  font-size: 1rem;
-  color: #7f8c8d;
+  font-size: 1.1rem;
 }
 
-/* Timing Cards */
+/* Timing Section */
 .timing-cards-b {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
 .timing-card-b {
-  width: 48%;
-  background-color: #ecf0f1;
-  padding: 15px;
-  margin-bottom: 15px;
+  background-color: #f0f0f0;
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.timing-card-b:hover {
-  transform: translateY(-5px);
 }
 
 .timing-card-b strong {
   display: block;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #34495e;
-  margin-bottom: 5px;
-}
-
-.timing-card-b p {
-  font-size: 1rem;
-  color: #7f8c8d;
-}
-
-.icon-b, .icon {
-  color: #3498db;
-}
-
-/* Section Titles */
-h3 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-p, li {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  line-height: 1.6;
-}
-
-/* Links */
-a {
-  color: #3498db;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #2c3e50;
-}
-
-/* Contact Information Styling */
-ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-ul li {
-  font-size: 1.2rem;
-  color: #7f8c8d;
+  font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-/* Fancy Button Styling */
-button {
-  background-color: #3498db;
-  color: #fff;
-  padding: 12px 20px;
-  font-size: 1rem;
+.timing-card-b p {
+  font-size: 1.1rem;
+}
+
+/* Interesting Facts Section */
+.interesting-facts-b ul {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
+  
+}
+
+.interesting-facts-b li {
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight:normal ;
+  color: black;
+  margin-bottom: 15px;
+}
+
+/* Visiting Information Section */
+.visiting-info-b {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.visiting-info-b p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.visiting-info-b strong {
   font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #2980b9;
+/* Contact Information Section */
+.contact-info-b {
+  margin-top: 30px;
 }
 
-/* Small Screen / Mobile */
-@media (max-width: 768px) {
-  .card-container-b {
-    flex-direction: column;
-  }
+.contact-info-b ul {
+  font-size: 1.2rem;
+  font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
+}
 
-  .card-b {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+.contact-info-b a {
+  color: #007bff;
+  text-decoration: none;
+}
 
-  .timing-card-b {
-    width: 100%;
-  }
+.contact-info-b a:hover {
+  text-decoration: underline;
+}
 
-  .overlay-b h2 {
-    font-size: 1.8rem;
-  }
+/* Image Gallery Section */
+.place-images-b {
+  margin-top: 30px;
+}
 
-  .overlay-b p {
-    font-size: 1rem;
-  }
+.image-gallery-b {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.image-gallery-b img {
+  width: 25%;
+  height: auto;
+  object-fit: cover;
 }

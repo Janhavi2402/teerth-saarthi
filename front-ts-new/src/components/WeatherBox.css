@@ -1,0 +1,95 @@
+
+/* Container for both the weather box and map (when added later) */
+h3{
+    font-family :Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.weather-box-container {
+    display: flex;
+    justify-content: flex-start; /* Aligns the weather box to the left */
+    align-items: center;
+    gap: 20px; /* Space between weather box and the map */
+    margin: 20px auto;
+    max-width: 90%;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Styles for the weather box */
+  .weather-box {
+    background-color: linear-gradient(135deg, #f0f8ff 0%, #87ceeb 100%); /* Gradient background */
+    border-radius: 12px; /* Smooth rounded corners */
+    padding: 25px;
+    width: 280px;
+    max-width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1s ease-out; /* Animation on load */
+  }
+  
+  /* Hover effect for better interaction */
+  .weather-box:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  }
+  
+  .weather-box h3 {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+    color: #1e90ff;
+    margin-bottom: 12px;
+    text-transform: uppercase; /* Makes it look more polished */
+  }
+  
+  .weather-box .location {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #4682b4;
+    margin-bottom: 10px;
+  }
+  
+  .weather-box .condition-text {
+    font-size: 1.2em;
+    color: #2e8b57; /* Green for weather condition */
+    font-style: italic;
+  }
+  
+  .weather-box .temperature {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #ff4500; /* Warm orange for temperature */
+    margin-bottom: 10px;
+  }
+  
+  .weather-box .humidity,
+  .weather-box .wind {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .weather-box img {
+    display: block;
+    margin: 15px auto;
+    width: 60px;
+    height: 60px;
+  }
+  
+  /* Gradient effect on hover */
+  .weather-box:hover {
+    background-color: linear-gradient(135deg, #87ceeb 0%, #f0f8ff 100%);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

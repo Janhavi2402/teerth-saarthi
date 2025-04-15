@@ -1,0 +1,35 @@
+/* Map and weather container - display side by side */
+.map-weather-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 20px auto;
+  max-width: 90%;
+}
+
+/* Map container styling */
+.map-container {
+  flex: 1;
+  height: 500px;
+  margin-top: 10px;
+  overflow: visible;  /* Let scaled map overflow to prevent clipping */
+  position: relative;
+}
+
+/* Map styling for the map element itself */
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: transparent;
+  border: 10px solid rgb(140, 150, 151);
+  transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;  /* Important: includes border in the width/height */
+  transform-origin: center; /* Ensures scaling from the center */
+}
+
+/* Hover effect on map */
+.map-container:hover #map {
+  transform: scale(1.05);
+  z-index: 2;
+}
