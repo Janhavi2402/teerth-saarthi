@@ -18,6 +18,7 @@ const jRoute = require("./routes/j_route");
 const hRoute = require("./routes/h_route");
 const sRoute = require("./routes/s_route");
 const wishlist=require("./routes/wishlistRoutes")
+const chatbotRoutes = require("./routes/chatbotRoutes");
 
 // Connect to MongoDB
 connectDB();
@@ -26,10 +27,8 @@ const app = express();
 
 // Allow all origins (for development purposes, remove or modify for production)
 app.use(cors({
-  origin: "*", // Allow all origins
-  credentials: true, // Allow cookies/credentials to be sent with requests
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'],
+  origin: "http://localhost:3000", // 👈 frontend URL
+  credentials: true,
 }));
 
 app.use(cookieParser());
@@ -52,6 +51,7 @@ app.use("/api", jRoute);
 app.use("/api", hRoute);
 app.use("/api", sRoute);
 app.use("/api",wishlist);
+app.use("/api/chatbot", chatbotRoutes);
 
 // Default route
 app.get("/", (req, res) => {

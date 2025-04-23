@@ -38,7 +38,7 @@ export default function Footer() {
 
   return (
     <footer style={footerContainerStyle}>
-      <span>Copyright &copy; 2021 Teerth-Seerthi. All rights reserved</span>
+      <span>Copyright &copy; 2024 Teerth-Seerthi. All rights reserved</span>
       <ul style={ulStyle}>
         <li style={liStyle}>
           <a href="#hero" style={linkStyle} onMouseOver={(e) => (e.target.style.color = linkHoverStyle.color)} onMouseOut={(e) => (e.target.style.color = linkStyle.color)}>

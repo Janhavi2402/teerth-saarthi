@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import './wish.css';
 export const WishList = () => {
   const [wishlist, setWishlist] = useState([]);
   const tokenuser = localStorage.getItem("token");

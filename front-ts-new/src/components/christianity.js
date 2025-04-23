@@ -99,8 +99,8 @@ export default function Christianity() {
   }
 
   return (
-    <div className="container">
-      <h1 className="title">Christianity Temples</h1>
+    <div className="page-wrapper">
+      <h1 className="title">Christianity</h1>
 
       {/* Search Bar */}
       <div className="search-container">
@@ -118,7 +118,7 @@ export default function Christianity() {
 
       {/* List of Filtered Temples */}
       <div className="temples-list">
-        <h2>List of Temples</h2>
+        <h2>List of Churches</h2>
         {filteredTemples.length > 0 ? (
           <ul className="temple-items">
             {filteredTemples.map((temple) => (
@@ -142,7 +142,7 @@ export default function Christianity() {
             ))}
           </ul>
         ) : (
-          <p>No temples found</p> // Display this message if no temples match the search
+          <p>Loading...</p> // Display this message if no temples match the search
         )}
       </div>
     </div>

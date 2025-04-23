@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import './Islam.css'; // Add the CSS file for styling
+import { Link, useHistory } from 'react-router-dom'; // Import Link and useHistory for navigation
+import './Buddhism.css'; // Add the CSS file for styling
 import './search.css';
-export default function Islam() {
+
+export default function Buddhism() {
   const [temples, setTemples] = useState([]); // Stores temples for both search and the full list
   const [searchQuery, setSearchQuery] = useState(''); // Stores the current search query
   const [filteredTemples, setFilteredTemples] = useState([]); // Stores the filtered temples based on search
-   const [wishlist, setWishlist] = useState([]);
-    const tokenuser=localStorage.getItem("token");
-    const decodedtoken = JSON.parse(atob(tokenuser.split(".")[1]));
-    // console.log("decoded Token: ", decodedtoken)
-    const userId = decodedtoken.id;
+  const [wishlist, setWishlist] = useState([]);
+  const tokenuser = localStorage.getItem("token");
+  const decodedtoken = JSON.parse(atob(tokenuser.split(".")[1]));
+  const userId = decodedtoken.id;
+
+  const history = useHistory(); // Use the useHistory hook for navigation
+
   // Fetch the list of all temples on initial load
   const fetchTemples = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/islam');
+      const response = await fetch('http://localhost:5000/api/buddhism');
       const data = await response.json();
       setTemples(data); // Store all temples in the state
       setFilteredTemples(data); // Set the filtered temples to the full list initially
@@ -27,13 +30,13 @@ export default function Islam() {
   useEffect(() => {
     fetchTemples();
   }, []); // Runs only once on component mount
- const fetchWishlist = async () => {
+
+  const fetchWishlist = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
       const data = await response.json();
       
       if (data.success) {
-        console.log("wishlistdata", data);
         const places = data.data.places; // Get 'places' from the wishlist object
         setWishlist(places);
       } else {
@@ -44,11 +47,12 @@ export default function Islam() {
       setWishlist([]);
     }
   };
-  
+
   useEffect(() => {
     fetchTemples();
     fetchWishlist(); 
   }, [wishlist]);
+
   // Function to handle the search query and filter temples
   const handleSearch = () => {
     if (searchQuery) {
@@ -61,14 +65,15 @@ export default function Islam() {
     }
   };
 
-  // Function to handle click on a temple and redirect to its details page (optional)
-  const handleTempleClick = (templeId) => {
-    console.log(`Temple clicked with ID: ${templeId}`);
-    // For now, we are relying on the Link for navigation
+  // Function to handle click on a temple card and redirect to nearby attractions page
+  const handleCardClick = (templeId) => {
+    history.push(`/nearby-attraction-buddhism/${templeId}`); // Navigate to the nearby attractions page
   };
-  const  handleWishlistToggle=async(temple)=>{
-    try{
-      const body={
+
+  // Function to toggle wishlist
+  const handleWishlistToggle = async (temple) => {
+    try {
+      const body = {
         userId,
         temple_id: temple._id,
         name: temple.name,
@@ -76,16 +81,14 @@ export default function Islam() {
         description: temple.description,
         state: temple.state
       };
-      console.log("Sending body:", body);
-      const response=await fetch("http://localhost:5000/api/wishlist",{
+      const response = await fetch("http://localhost:5000/api/wishlist", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(body)
-      })
+      });
       const result = await response.json();
-      console.log(result);
       if (!response.ok) {
         console.error("Server error response:", result);
       } else {
@@ -94,10 +97,11 @@ export default function Islam() {
     } catch (error) {
       console.error("Error updating wishlist", error);
     }
-  }
+  };
+
   return (
     <div className="page-wrapper">
-      <h1 className="title">Islam</h1>
+      <h1 className="title">Buddhism</h1>
 
       {/* Search Bar */}
       <div className="search-container">
@@ -115,31 +119,32 @@ export default function Islam() {
 
       {/* List of Filtered Temples */}
       <div className="temples-list">
-        <h2>List of Dargahs/Mosques</h2>
+        <h2>List of Temples/Monasteries</h2>
         {filteredTemples.length > 0 ? (
           <ul className="temple-items">
             {filteredTemples.map((temple) => (
               <li key={temple._id} className="flex items-center justify-between bg-white shadow-md p-4 mb-4 rounded-lg">
                 {/* Link to the temple details page */}
-                <Link to={`/islam/${temple._id}`} className="text-lg font-medium text-blue-700 hover:underline" onClick={() => handleTempleClick(temple._id)}>
+                <div onClick={() => handleCardClick(temple._id)} className="text-lg font-medium text-blue-700 cursor-pointer hover:underline">
                   {temple.name}
-                </Link>
+                </div>
+
                 <button
-          onClick={() => handleWishlistToggle(temple)}
-          className={`text-2xl transition-transform duration-200 hover:scale-125 ${
-            wishlist.some(item => item.temple_id === temple._id)
-              ? 'text-red-500'
-              : 'text-gray-400 hover:text-red-400'
-          }`}
-          title="Add to wishlist"
-        >
-          {wishlist.some(item => item.temple_id === temple._id) ? '❤' : '🤍'}
-        </button>
+                  onClick={() => handleWishlistToggle(temple)}
+                  className={`text-2xl transition-transform duration-200 hover:scale-125 ${
+                    wishlist.some(item => item.temple_id === temple._id)
+                      ? 'text-red-500'
+                      : 'text-gray-400 hover:text-red-400'
+                  }`}
+                  title="Add to wishlist"
+                >
+                  {wishlist.some(item => item.temple_id === temple._id) ? '❤' : '🤍'}
+                </button>
               </li>
             ))}
           </ul>
         ) : (
-          <p>Loading...</p> // Display this message if no temples match the search
+          <p>No temples found</p> // Display this message if no temples match the search
         )}
       </div>
     </div>

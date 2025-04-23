@@ -9,6 +9,7 @@ export default function ProfilePage() {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
+        // console.log("token",token)
         if (!token) {
           console.error("No token found in localStorage");
           return;
@@ -19,8 +20,9 @@ export default function ProfilePage() {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
         });
-
+     
         const data = await response.json();
+        console.log("data", data);
         if (response.ok) {
           setProfile(data);
         } else {
@@ -62,7 +64,7 @@ export default function ProfilePage() {
             </p>
             <p className="text-lg font-semibold text-orange-800">
               <span className="text-orange-600">Wishlist:</span>{" "}
-              {profile.wishlist || "No items in wishlist"}
+              {profile.wishlist?.length > 0 ? profile.wishlist.join(", ") : "No items in wishlist"}
             </p>
           </div>
 

@@ -100,8 +100,8 @@ export default function Jainism() {
   }
 
   return (
-    <div className="container">
-      <h1 className="title">Jainism Temples</h1>
+    <div className="page-wrapper">
+      <h1 className="title">Jainism</h1>
 
       {/* Search Bar */}
       <div className="search-container">
@@ -143,7 +143,7 @@ export default function Jainism() {
             ))}
           </ul>
         ) : (
-          <p>No temples found</p> // Display this message if no temples match the search
+          <p>Loading...</p> // Display this message if no temples match the search
         )}
       </div>
     </div>

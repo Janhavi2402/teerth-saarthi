@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
+
 
 export default function ScrollToTop() {
   const [scrollState, setScrollState] = useState(false);
@@ -22,11 +22,7 @@ export default function ScrollToTop() {
     };
   }, []);
 
-  return (
-    <ToTop onClick={toTop} scrollState={scrollState}>
-      <img src={logo} alt="Scroll to top" />
-    </ToTop>
-  );
+
 }
 
 const ToTop = styled.div`

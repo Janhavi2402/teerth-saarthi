@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // useParams to get the religion and temple ID
+import { useParams } from 'react-router-dom';
 
-export default function NearbyAttractionsSikhismPage() {
-  const { id, religion } = useParams(); // Get both the religion and temple ID from the URL
+export default function NearbyAttractionsSikhism() {
+  const { id } = useParams();
   const [attractions, setAttractions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [gurudwara, setGurudwara] = useState(null);
+
+  // Categories for filtering
+  const categories = [
+    { id: 'all', name: 'All Places' },
+    { id: 'historical', name: 'Historical' },
+    { id: 'natural', name: 'Natural' },
+    { id: 'religious', name: 'Religious' },
+    { id: 'culinary', name: 'Food & Dining' }
+  ];
 
   useEffect(() => {
     async function fetchNearbyAttractions() {
       try {
-        setLoading(true);
-        // Fetch temple details based on ID
-        const response = await fetch(
-          `http://localhost:5000/api/sikhism/${id}`
-        );
-        
-        // Check if response is successful
-        if (!response.ok) {
-          throw new Error('Failed to fetch temple details');
-        }
-
+        const response = await fetch(`http://localhost:5000/api/sikhism/${id}`);
         const data = await response.json();
 
-        // If the temple has nearby places, set them as attractions
-        if (data && data.nearby_places && data.nearby_places.length > 0) {
+        if (!response.ok) throw new Error('Failed to fetch Sikhism details.');
+
+        // Set Gurudwara details (assumed to be returned from MongoDB)
+        if (data?.gurudwara) {
+          setGurudwara(data.gurudwara);
+        } else {
+          setError('Gurudwara details not found.');
+          return;
+        }
+
+        // Set the nearby attractions if available
+        if (data?.nearby_places?.length > 0) {
           setAttractions(data.nearby_places);
         } else {
           setError('No nearby attractions found.');
@@ -38,83 +49,102 @@ export default function NearbyAttractionsSikhismPage() {
     }
 
     fetchNearbyAttractions();
-  }, [id]); // Re-run effect when id changes
+  }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  // Filter attractions by category
+  const filteredAttractions = activeCategory === 'all' 
+    ? attractions 
+    : attractions.filter(attraction => attraction.category === activeCategory);
 
-  // Inline CSS styles
-  const styles = {
-    container: {
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif',
-      backgroundColor: '#f9f9f9',
-      minHeight: '100vh',
-    },
-    header: {
-      fontSize: '2rem',
-      textAlign: 'center',
-      marginBottom: '20px',
-      color: '#333',
-    },
-    list: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '20px',
-      marginTop: '20px',
-    },
-    card: {
-      backgroundColor: '#fff',
-      padding: '15px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-      transition: 'transform 0.2s',
-    },
-    cardHover: {
-      transform: 'scale(1.05)',
-    },
-    cardTitle: {
-      fontSize: '1.5rem',
-      margin: '0',
-      color: '#333',
-    },
-    cardDescription: {
-      fontSize: '1rem',
-      color: '#555',
-      margin: '10px 0',
-    },
-    cardDistance: {
-      fontSize: '1rem',
-      fontWeight: 'bold',
-      color: '#333',
-    },
-    errorMessage: {
-      color: 'red',
-      fontSize: '1.2rem',
-      textAlign: 'center',
-    }
-  };
+  if (loading) return (
+    <div className="flex justify-center items-center h-64">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  );
+
+  if (error) return (
+    <div className="max-w-4xl mx-auto p-6 bg-red-50 rounded-lg border border-red-200">
+      <p className="text-center text-red-500 font-medium">{error}</p>
+    </div>
+  );
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>Nearby Attractions for {religion} Temple</h1>
-      <div style={styles.list}>
-        {attractions.length > 0 ? (
-          attractions.map((place, index) => (
-            <div
-              key={index}
-              style={{ ...styles.card, '&:hover': styles.cardHover }}
+    <div className="bg-gray-50 min-h-screen py-8 px-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Simple Header */}
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            Nearby Attractions
+          </h1>
+          <p className="text-gray-600">
+            Discover places near {gurudwara ? gurudwara.name : 'this location'}
+          </p>
+        </div>
+
+        {/* Simple Category Filter */}
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          {categories.map(category => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                activeCategory === category.id 
+                  ? "bg-blue-600 text-white" 
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
             >
-              <h2 style={styles.cardTitle}>{place.name}</h2>
-              <p style={styles.cardDescription}>{place.description}</p>
-              <p style={styles.cardDistance}>
-                <strong>Distance:</strong> {place.distance_km} km
-              </p>
+              {category.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Attractions Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {filteredAttractions.length > 0 ? (
+            filteredAttractions.map((place) => (
+              <div
+                key={place.id} 
+                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                {/* Category Label */}
+                <div className="p-4 bg-blue-50 border-b border-blue-100">
+                  <span className="text-blue-600 font-medium capitalize">
+                    {place.category}
+                  </span>
+                </div>
+                
+                {/* Content */}
+                <div className="p-5">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-xl font-bold text-gray-800">
+                      {place.name}
+                    </h3>
+                    <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">
+                      {place.rating}
+                    </span>
+                  </div>
+                  
+                  <div className="text-sm text-gray-500 mb-2">
+                    {place.distance_km} km • {place.estimated_time}
+                  </div>
+                  
+                  <p className="text-gray-600 mb-3">
+                    {place.description}
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full bg-white p-8 rounded-lg shadow text-center">
+              <p className="text-gray-600">No attractions found in this category.</p>
             </div>
-          ))
-        ) : (
-          <p style={styles.errorMessage}>No nearby attractions found for this temple.</p>
-        )}
+          )}
+        </div>
+
+        {/* Simple Footer */}
+        <div className="text-center text-gray-500 text-sm py-4">
+          <p>© 2023 Teerth Saarthi. All rights reserved.</p>
+        </div>
       </div>
     </div>
   );

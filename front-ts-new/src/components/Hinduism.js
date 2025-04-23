@@ -1,161 +1,188 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import './Hinduism.css'; // Add the CSS file for styling
+import { Link, useNavigate } from 'react-router-dom';
+import './styleH.css';
 import './search.css';
+
 export default function Hinduism() {
-  const [temples, setTemples] = useState([]); // Stores temples for both search and the full list
-  const [searchQuery, setSearchQuery] = useState(''); // Stores the current search query
-  const [filteredTemples, setFilteredTemples] = useState([]); // Stores the filtered temples based on search
+  const [temples, setTemples] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredTemples, setFilteredTemples] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const tokenuser=localStorage.getItem("token");
-  const decodedtoken = JSON.parse(atob(tokenuser.split(".")[1]));
-  // console.log("decoded Token: ", decodedtoken)
-  const userId = decodedtoken.id;
-  // console.log("UserId: ",userId);
 
+  const navigate = useNavigate();
 
-  // Fetch the list of all temples on initial load
+  // Decode token
+  const tokenuser = localStorage.getItem('token');
+  let userId = null;
+
+  if (tokenuser) {
+    try {
+      const decodedtoken = JSON.parse(atob(tokenuser.split('.')[1]));
+      userId = decodedtoken.id;
+    } catch (error) {
+      console.error('Invalid token:', error);
+    }
+  }
+
+  // Fetch temples on mount
+  useEffect(() => {
+    fetchTemples();
+  }, []);
+
+  // Fetch temples
   const fetchTemples = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/hinduism');
       const data = await response.json();
-      setTemples(data); // Store all temples in the state
-      setFilteredTemples(data); // Set the filtered temples to the full list initially
+      setTemples(data);
+      setFilteredTemples(data);
     } catch (error) {
       console.error('Error fetching temples:', error);
     }
   };
 
-  // Load temples initially
-  useEffect(() => {
-    fetchTemples();
-  }, []); // Runs only once on component mount
-
+  // Fetch wishlist
   const fetchWishlist = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
       const data = await response.json();
-      
-      if (data.success) {
-        console.log("wishlistdata", data);
-        const places = data.data.places; // Get 'places' from the wishlist object
-        setWishlist(places);
+
+      if (data.success && Array.isArray(data?.data?.places)) {
+        setWishlist(data.data.places);
       } else {
         setWishlist([]);
       }
     } catch (error) {
-      console.error("Error fetching wishlist:", error);
+      console.error('Error fetching wishlist:', error);
       setWishlist([]);
     }
   };
-  
+
+  // Fetch wishlist if userId is available
   useEffect(() => {
-    fetchTemples();
-    fetchWishlist(); 
-  }, [wishlist]);
+    if (userId) {
+      fetchWishlist();
+    }
+  }, [userId]);
 
-
-
-
-  // Function to handle the search query and filter temples
+  // Search temples by name
   const handleSearch = () => {
-    if (searchQuery) {
-      const filtered = temples.filter(temple =>
-        temple.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+    if (searchQuery.trim()) {
+      const filtered = temples.filter((temple) =>
+        temple.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setFilteredTemples(filtered); 
+      setFilteredTemples(filtered);
     } else {
-      setFilteredTemples(temples); 
+      setFilteredTemples(temples);
     }
   };
 
-  // Function to handle click on a temple and redirect to its details page (optional)
-  const handleTempleClick = (templeId) => {
-    console.log(`Temple clicked with ID: ${templeId}`);
-    // For now, we are relying on the Link for navigation
-  };
-  const  handleWishlistToggle=async(temple)=>{
-    try{
-      const body={
+  // Toggle wishlist
+  const handleWishlistToggle = async (temple) => {
+    if (!userId) {
+      alert('Please log in to add temples to your wishlist.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const body = {
         userId,
         temple_id: temple._id,
         name: temple.name,
         address: temple.address,
         description: temple.description,
-        state: temple.state
+        state: temple.state,
       };
-      console.log("Sending body:", body);
-      const response=await fetch("http://localhost:5000/api/wishlist",{
-        method: "POST",
+
+      const response = await fetch('http://localhost:5000/api/wishlist', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body)
-      })
+        body: JSON.stringify(body),
+      });
+
       const result = await response.json();
-      console.log(result);
-      if (!response.ok) {
-        console.error("Server error response:", result);
+      if (response.ok) {
+        fetchWishlist(); // Refresh wishlist
       } else {
-        setWishlist(prevWishlist => [...prevWishlist, result]);
+        console.error('Server error response:', result);
       }
     } catch (error) {
-      console.error("Error updating wishlist", error);
+      console.error('Error updating wishlist', error);
     }
-  }
+  };
   return (
-    <div className="container">
-      <h1 className="title">Hinduism Temples</h1>
-
-      {/* Search Bar */}
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search temples by name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} // Update search query on input change
-          className="search-input"
-        />
-        <button onClick={handleSearch} className="search-button">
-          Search
-        </button>
-      </div>
-
-      {/* List of Filtered Temples */}
-      <div className="temples-list">
-        <h2>List of Temples</h2>
-        {filteredTemples.length > 0 ? (
-          <ul className="temple-items">
-            {filteredTemples.map((temple) => (
-        <li key={temple._id} className="flex items-center justify-between bg-white shadow-md p-4 mb-4 rounded-lg">
-        {/* Temple Name Link */}
-        <Link
-          to={`/hinduism/${temple._id}`}
-          onClick={() => handleTempleClick(temple._id)}
-          className="text-lg font-medium text-blue-700 hover:underline"
-        >
-          {temple.name}
-        </Link>
+    <div className="page-wrapper">
       
-        {/* Wishlist Heart Button */}
-        <button
-          onClick={() => handleWishlistToggle(temple)}
-          className={`text-2xl transition-transform duration-200 hover:scale-125 ${
-            wishlist.some(item => item.temple_id === temple._id)
-              ? 'text-red-500'
-              : 'text-gray-400 hover:text-red-400'
-          }`}
-          title="Add to wishlist"
-        >
-          {wishlist.some(item => item.temple_id === temple._id) ? '❤' : '🤍'}
-        </button>
-      </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No temples found</p> // Display this message if no temples match the search
-        )}
-      </div>
+        <h1 className="title">Hinduism</h1>
+  
+        {/* Search Bar */}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search temples by name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+          <button onClick={handleSearch} className="search-button">
+            Search
+          </button>
+        </div>
+  
+        {/* Temples List */}
+        <div className="temples-list">
+          <h2>List of Temples</h2>
+          {filteredTemples.length > 0 ? (
+            <ul className="temple-items">
+              {filteredTemples.map((temple) => {
+                const isWishlisted = Array.isArray(wishlist)
+                  ? wishlist.some((item) => item.temple_id === temple._id)
+                  : false;
+  
+                return (
+                  <li
+                    key={temple._id}
+                    className="flex items-center justify-between bg-white shadow-md p-4 mb-4 rounded-lg"
+                  >
+                    <Link
+                      to={`/hinduism/${temple._id}`}
+                      className="text-lg font-medium text-blue-700 hover:underline"
+                    >
+                      {temple.name}
+                    </Link>
+  
+                    <button
+                      onClick={() => handleWishlistToggle(temple)}
+                      className={`text-2xl transition-transform duration-200 hover:scale-125 ${
+                        isWishlisted
+                          ? 'text-red-500'
+                          : 'text-gray-400 hover:text-red-400'
+                      }`}
+                      title="Add to wishlist"
+                    >
+                      <span
+                        style={{
+                          transition: 'transform 0.2s ease',
+                          display: 'inline-block',
+                          transform: isWishlisted ? 'scale(1.2)' : 'scale(1)',
+                        }}
+                      >
+                        {isWishlisted ? '❤️' : '🤍'}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+      
     </div>
   );
+  
 }

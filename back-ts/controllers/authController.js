@@ -59,7 +59,6 @@ const logoutUser = (req, res) => {
   res.cookie("token", "", { expires: new Date(0), httpOnly: true });
   res.json({ message: "Logged out successfully" });
 };
-
 const getUserProfile = async (req, res) => {
   try {
     if (!req.cookies) {
@@ -75,15 +74,14 @@ const getUserProfile = async (req, res) => {
 
     const decoded = jwt.verify(token, secretKey);
     const user = await User.findOne({ email: decoded.email }).select("-password"); 
-
+   
     if (!user) return res.status(404).json({ message: "User not found" });
-
+    console.log("user",user)
     res.json(user);
   } catch (error) {
     console.error("Profile Fetch Error:", error);
     res.status(500).json({ message: "Error fetching profile", error: error.message });
   }
 };
-
 
 module.exports = { registerUser, loginUser, logoutUser,getUserProfile };
