@@ -5,7 +5,7 @@ export default function WeatherBox({ latitude, longitude }) {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
 
-  const API_KEY = "de0552a7e61443ac86a112835252803";
+  const API_KEY = "";
 
   useEffect(() => {
     if (!latitude || !longitude) return;
