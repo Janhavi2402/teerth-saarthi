@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import json
 
 # MongoDB Atlas connection string
-MONGO_URI = "mongodb+srv://jpatil2670:6260162831@cluster0.bi5q8.mongodb.net/teerth-saarthi?retryWrites=true&w=majority"
+MONGO_URI = ""
 
 # Connect to MongoDB
 client = MongoClient(MONGO_URI)
